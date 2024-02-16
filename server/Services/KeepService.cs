@@ -8,4 +8,14 @@ public class KeepService(KeepRepository repo){
         Keeps keeps = repo.CreateKeep(keepData);
         return keeps;
     }
+
+    internal List<Keeps> GetAllKeeps(){
+        List<Keeps> keeps = repo.GetAllKeeps();
+        return keeps;
+    }
+
+    internal Keeps GetOneKeepById(int keepId){
+        Keeps keeps = repo.GetOneKeepById(keepId);
+        return keeps;
+    }
 }

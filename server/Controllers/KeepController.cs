@@ -28,4 +28,32 @@ public class KeepController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpGet]
+    public ActionResult<List<Keeps>> GetAllKeeps(){
+        try
+        {
+        List<Keeps> keeps = keepService.GetAllKeeps();
+        return Ok(keeps);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
+
+    [HttpGet("{keepId}")]
+    public ActionResult<Keeps> GetOneKeepById(int keepId){
+        try
+        {
+           Keeps keeps = keepService.GetOneKeepById(keepId);
+           return Ok(keeps); 
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
 }
