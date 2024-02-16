@@ -23,4 +23,15 @@ CREATE TABLE keeps(
         ( name, description, img, views)
         VALUES
         ( 'yes', 'wow', 'https:plswork.com', 4);
-CREATE TABLE vaults()
+
+
+
+CREATE TABLE vaults(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  creatorId VARCHAR(255),
+  name VARCHAR(60) NOT NULL,
+  description VARCHAR(400) NOT NULL,
+  img VARCHAR(500) NOT NULL,
+  isPrivate BOOLEAN,
+  Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
