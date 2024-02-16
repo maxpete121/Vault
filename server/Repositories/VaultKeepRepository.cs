@@ -41,4 +41,28 @@ public class VaultKeepRepository(IDbConnection db){
         }, new{vaultId}).ToList();
         return newVaultKeep;
     }
+
+    internal VaultKeeps GetOneVaultKeepById(int vaultKeepId){
+        string sql = @"
+        SELECT
+        vaultkeeps.*,
+        accounts.*
+        FROM vaultkeeps
+        JOIN accounts ON vaultkeeps.creatorId = accounts.id
+        WHERE vaultkeeps.id = @vaultKeepId;
+        ";
+        VaultKeeps vaultKeeps = db.Query<VaultKeeps, Account, VaultKeeps>(sql, (vaultKeeps, account)=>{
+            vaultKeeps.CreatorId = account.Id;
+            return vaultKeeps;
+        }, new{vaultKeepId}).FirstOrDefault();
+        return vaultKeeps;
+    }
+
+    internal void DeleteVaultKeep(int vaultKeepId){
+        string sql = @"
+        DELETE FROM vaultkeeps
+        WHERE id = @vaultKeepId
+        ";
+        db.Execute(sql, new{vaultKeepId});
+    }
 }
