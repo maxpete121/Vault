@@ -5,8 +5,8 @@ public class KeepRepository(IDbConnection db){
 
     internal Keeps CreateKeep(Keeps keepData){
         string sql =@"
-        INSERT INTO recipes
-        (creatorId, name, description, img, views)
+        INSERT INTO keeps
+        (creatorId ,name, description, img, views)
         VALUES
         (@creatorId, @name, @description, @img, @views);
 
@@ -19,6 +19,7 @@ public class KeepRepository(IDbConnection db){
         ";
         Keeps keeps = db.Query<Keeps, Account, Keeps>(sql, (keeps, account)=>{
             keeps.Creator = account;
+            keeps.Kept = 0;
             return keeps;
         }, keepData).FirstOrDefault();
         return keeps;

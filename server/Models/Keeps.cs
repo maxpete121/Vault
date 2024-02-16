@@ -8,4 +8,5 @@ public class Keeps : RepoItem<int>{
     public string Img {get; set;}
     public int Views {get; set;}
     public Account Creator {get; set;}
+    public int Kept {get; set;}
 }
