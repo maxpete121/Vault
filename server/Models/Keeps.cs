@@ -1,0 +1,11 @@
+namespace Vault.Models;
+
+
+public class Keeps : RepoItem<int>{
+    public string CreatorId {get; set;}
+    public string Name {get; set;}
+    public string Description {get; set;}
+    public string Img {get; set;}
+    public int Views {get; set;}
+    public Account Creator {get; set;}
+}
