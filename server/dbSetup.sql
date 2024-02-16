@@ -60,3 +60,7 @@ CREATE TABLE vaultkeeps(
         JOIN keeps ON vaultkeeps.keepId = keeps.id
         JOIN accounts ON vaultkeeps.creatorId = accounts.id
         WHERE vaultkeeps.id = 1;
+        SELECT
+        *
+        FROM accounts
+        WHERE id = '65837617fb48f6cd659dd941';
