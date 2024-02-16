@@ -6,10 +6,12 @@ namespace Vault.Controllers;
 public class VaultController : ControllerBase{
     private readonly Auth0Provider  auth;
     private readonly VaultService vaultService;
+    private readonly VaultKeepService vaultKeepService;
 
-    public VaultController(Auth0Provider auth, VaultService vaultService){
+    public VaultController(Auth0Provider auth, VaultService vaultService, VaultKeepService vaultKeepService){
         this.auth = auth;
         this.vaultService = vaultService;
+        this.vaultKeepService = vaultKeepService;
     }
 
     [HttpPost]
@@ -68,6 +70,21 @@ public class VaultController : ControllerBase{
           Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
           string message = vaultService.DeleteVault(vaultId, userInfo.Id);
           return Ok(message);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
+
+    
+    [HttpGet("{vaultId}/keeps")]
+    public ActionResult<List<VaultedKeep>> GetKeepsInVault(int vaultId){
+        try
+        {
+            List<VaultedKeep> vaultedKeeps = vaultKeepService.GetKeepsInVault(vaultId);
+            return Ok(vaultedKeeps);
         }
         catch (Exception error)
         {

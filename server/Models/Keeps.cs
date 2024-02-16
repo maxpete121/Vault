@@ -10,3 +10,7 @@ public class Keeps : RepoItem<int>{
     public Account Creator {get; set;}
     public int Kept {get; set;}
 }
+
+public class VaultedKeep : Keeps{
+    public int VaultKeepId {get; set;}
+}
