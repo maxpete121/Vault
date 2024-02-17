@@ -64,3 +64,10 @@ CREATE TABLE vaultkeeps(
         *
         FROM accounts
         WHERE id = '65837617fb48f6cd659dd941';
+
+        SELECT
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON vaults.creatorId = accounts.id
+        WHERE vaults.creatorId = '65837617fb48f6cd659dd941'

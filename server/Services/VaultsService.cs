@@ -11,7 +11,7 @@ public class VaultService(VaultsRepository repo){
 
     internal Vaults GetVaultById(int vaultId){
         Vaults vaults = repo.GetVaultById(vaultId);
-        if(vaults == null){throw new Exception("Item not found.");}
+        if(vaults == null || vaults.IsPrivate == true){throw new Exception("Item not found.");}
         else{
         return vaults;
         }
@@ -38,5 +38,12 @@ public class VaultService(VaultsRepository repo){
             repo.DeleteVault(vaultId);
             return $"{foundVault.Name} was deleted.";
         }else{throw new Exception("You are not authorized to delete this Vault.");}
+    }
+
+    internal List<Vaults> GetMyVaults(string userId){
+        if(userId != null){
+        List<Vaults> myVaults = repo.GetMyVaults(userId);
+        return myVaults;
+        }else{throw new Exception("You must be logged in to make this request");}
     }
 }
