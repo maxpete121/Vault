@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div>
+        <h4>Home</h4>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,9 +12,19 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
+          <div class="dropdown">
+            <h5 class="text-light" type="button" data-bs-toggle="dropdown">Create</h5>
+            <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-end p-0" aria-labelledby="authDropdown">
+            <div class="list-group">
+                <div class="list-group-item dropdown-item list-group-item-action">
+                  <h6 type="button" class="" data-bs-toggle="modal" data-bs-target="#createModal">Create Keep</h6>
+                </div>
+              <div class="list-group-item dropdown-item list-group-item-action selectable">
+                <h6 type="button" class="" data-bs-toggle="modal" data-bs-target="#createVModal">Create Vault</h6>
+              </div>
+            </div>
+          </div>
+          </div>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -26,12 +36,15 @@
       <Login />
     </div>
   </nav>
+  <ModalWrapper id="createModal"/>
+  <ModalWrapper id="createVModal"/>
 </template>
 
 <script>
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import ModalWrapper from './ModalWrapper.vue';
 export default {
   setup() {
 
@@ -50,7 +63,7 @@ export default {
       }
     }
   },
-  components: { Login }
+  components: { Login, ModalWrapper }
 }
 </script>
 
