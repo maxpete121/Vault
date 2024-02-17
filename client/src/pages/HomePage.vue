@@ -1,14 +1,31 @@
 <template>
-
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-3 mt-3" v-for="keep in keeps">
+        <KeepComponentCard :keep="keep"/>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
+import { computed, onMounted } from 'vue'
+import {vaultService} from '../services/VaultService.js'
+import {keepService} from '../services/KeepService.js'
+import { AppState } from '../AppState'
+import KeepComponentCard from '../components/KeepComponentCard.vue'
 export default {
   setup() {
-    return {
-      
+    onMounted(()=>{
+      getAllKeeps()
+    })
+    async function getAllKeeps(){
+      await keepService.getAllKeeps()
     }
-  }
+    return {
+      keeps: computed(()=> AppState.allKeeps)
+    }
+  }, components: {KeepComponentCard}
 }
 </script>
 
