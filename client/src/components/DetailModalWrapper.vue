@@ -10,7 +10,7 @@
         <div v-if="activeKeep !== null" class="d-flex">
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
             <div class="ms-3">
-                <router-link :to="{ name: 'Profile' }">
+                <router-link :to="{ name: 'Profile', params: {profileId: activeKeep.creatorId} }">
                     <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex align-items-center mb-2" >
                         <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="">
                         <h5 class="ms-2 text-dark">{{ activeKeep.creator.name }}</h5>
