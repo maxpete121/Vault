@@ -1,7 +1,7 @@
 <template>
-    <div @click="getVaultById()" :style="newBg" class="vault d-flex align-items-end p-2">
-        <div class=" align-items-center">
-            <h6 class="me-4">{{ userVault.name }}</h6>
+    <div @click="getVaultById()" :style="newBg" class="vault d-flex flex-column justify-content-end p-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="me-4">{{ userVault.name }}</h5>
             <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
     </div>

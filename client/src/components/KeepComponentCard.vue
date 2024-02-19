@@ -20,12 +20,16 @@ import { computed, ref, onMounted } from 'vue';
 import { Keeps } from '../models/Keeps';
 import DetailModalWrapper from '../components/DetailModalWrapper.vue'
 import {keepService} from '../services/KeepService.js'
+import { vaultService } from '../services/VaultService';
+import { profileService } from '../services/ProfileService';
 export default {
     props: {keep: {type: Keeps, required: true}},
     setup(props){
+        let useAccount = computed(()=> AppState.account)
         async function getKeepById(){
             await keepService.updateViews(props.keep.id)
             await keepService.getKeepById(props.keep.id)
+            await profileService.getYourVaults(useAccount.value.id)
         }
     return { 
         getKeepById,

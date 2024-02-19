@@ -41,6 +41,16 @@
         </div>
       </div>
       <div class="modal-footer">
+        <div>
+          <form action="">
+            <div class="d-flex add-keep">
+              <select v-model="vaultData" class="form-control w-50 me-2" name="" id="">
+                <option v-for="yourVault in yourVaults" :value="yourVault.id">{{yourVault.name}}</option>
+              </select>
+              <button class="btn btn-secondary">Add to Vault</button>
+            </div>
+          </form>
+        </div>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
@@ -53,16 +63,26 @@
 import { Modal } from 'bootstrap';
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
-import {profileService} from '../services/ProfileService.js'
+import {profileService} from '../services/ProfileService.js';
+import {vaultKeepService} from '../services/VaultKeepService.js';
 export default {
     setup(){
+      let useActiveKeep = computed(()=> AppState.activeKeep)
+      let vaultData = ref('')
         async function getProfileById(profileId){
             Modal.getOrCreateInstance("#detailModal").hide()
             await profileService.getProfileById(profileId)
         }
+
+        async function createVaultKeep(){
+          await vaultKeepService.createVaultKeep(vaultData.value, useActiveKeep.value.id)
+        }
     return { 
+        vaultData,
         getProfileById,
-        activeKeep: computed(()=> AppState.activeKeep)
+        activeKeep: computed(()=> AppState.activeKeep),
+        vaults: computed(()=> AppState.userVaults),
+        yourVaults: computed(()=> AppState.yourVaults)
      }
     }
 };
@@ -70,6 +90,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.add-keep{
+  width: 300px;
+}
 .stat-container{
   outline: solid 2px black;
   border-radius: 15px;

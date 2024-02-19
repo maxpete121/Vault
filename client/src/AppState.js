@@ -22,4 +22,6 @@ export const AppState = reactive({
   activeVault: {},
 /**@type {Keeps[]} */
   vaultsKeeps: [],
+/**@type {Vaults[]} */
+  yourVaults: [],
 })

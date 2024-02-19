@@ -18,6 +18,12 @@ class ProfileService{
         AppState.userVaults = newVaults
     }
 
+    async getYourVaults(profileId){
+        let response = await api.get(`api/profiles/${profileId}/vaults`)
+        let newVaults = await response.data.map(vault => new Vaults(vault))
+        AppState.yourVaults = newVaults
+    }
+
     async getUserKeeps(profileId){
         let response = await api.get(`api/profiles/${profileId}/keeps`)
         let userKeeps = await response.data.map(keep => new Keeps(keep))

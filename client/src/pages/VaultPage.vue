@@ -7,13 +7,19 @@
             </div>
         </div>
         <div class="row justify-content-center">
+            <div class="col-4 d-flex justify-content-center">
+                <button class="btn btn-outline-dark me-2">Add Keep</button>
+                <button class="btn btn-outline-dark">Make Private</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2">
             <div class="col-2 text-center">
                 <h4>Keeps</h4>
             </div>
         </div>
-        <div class="keep-container">
-            <div class="m-2" v-for="keep in keeps">
-            <KeepComponentCard :keep="keep"/>
+        <div class="row justify-content-center">
+            <div class="col-3" v-for="keep in keeps">
+            <VaultKeepCard :keeper="keep"/>
             </div>
         </div>
     </section>
@@ -25,11 +31,13 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { vaultService } from '../services/VaultService';
 import { useRoute } from 'vue-router';
-import KeepComponentCard from '../components/KeepComponentCard.vue';
+import VaultKeepCard from '../components/VaultKeepCard.vue';
+import { keepService } from '../services/KeepService';
 export default {
     setup(){
         let route = useRoute()
         onMounted(()=>{
+            keepService.getAllKeeps()
             vaultService.getVaultById(route.params.vaultId)
             getVaultKeeps()
         })
@@ -41,7 +49,7 @@ export default {
         activeVault: computed(()=> AppState.activeVault),
         keeps: computed(()=> AppState.vaultsKeeps)
      }
-    }, components: { KeepComponentCard }
+    }, components: { VaultKeepCard }
 };
 </script>
 
@@ -50,7 +58,5 @@ export default {
 .img-resize{
     max-height: 300px;
 }
-.keep-container{
-    columns: 300px;
-}
+
 </style>
