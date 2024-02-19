@@ -1,7 +1,7 @@
 <template>
   <section class="container-fluid">
-    <div class="row">
-      <div class="col-3 mt-3" v-for="keep in keeps">
+    <div class=" justify-content-center container-main mt-3">
+      <div class="m-3" v-for="keep in keeps">
         <KeepComponentCard :keep="keep"/>
       </div>
     </div>
@@ -48,5 +48,9 @@ export default {
       object-position: center;
     }
   }
+}
+
+.container-main{
+  columns: 300px;
 }
 </style>

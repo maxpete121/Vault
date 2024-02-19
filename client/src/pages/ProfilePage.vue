@@ -23,7 +23,7 @@
         </div>
         <div class="row justify-content-center vault-container ms-4 me-4 p-1">
             <div class="col-3 m-3" v-for="keep in keeps">
-                <KeepComponentCard :keep="keep"/>
+                <ProfileKeepCard :keep="keep"/>
             </div>
         </div>
     </section>
@@ -37,6 +37,7 @@ import { computed, ref, onMounted } from 'vue';
 import { profileService } from '../services/ProfileService';
 import VaultComponentCard from '../components/VaultComponentCard.vue';
 import KeepComponentCard from '../components/KeepComponentCard.vue';
+import ProfileKeepCard from '../components/ProfileKeepCard.vue';
 export default {
     setup() {
         onMounted(()=>{
@@ -62,7 +63,7 @@ export default {
                 return style
             })
         }
-    }, components: {VaultComponentCard, KeepComponentCard}
+    }, components: {VaultComponentCard, ProfileKeepCard}
 };
 </script>
 
@@ -76,7 +77,6 @@ export default {
     max-height: 250px;
     overflow-y: scroll;
     border-bottom: solid 2px black;
-    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.441);
 }
 
 .bg-resize {

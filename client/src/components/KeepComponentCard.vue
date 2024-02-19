@@ -1,10 +1,13 @@
 <template>
-    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex align-items-end p-2 justify-content-between">
-        <div>
-            <h5 class="">{{ keep.name }}</h5>
-        </div>
-        <div>
-            <img class="profile-pic rounded-circle" :src="keep.creator.picture" alt="User profile picture.">
+    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex align-items-end p-2">
+        <img class="card-img" :src="keep.img" alt="">
+        <div class="d-flex card-child align-items-center justify-content-between">
+            <div>
+                <h5 class="">{{ keep.name }}</h5>
+            </div>
+            <div class="d-flex">
+                <img class="profile-pic rounded-circle" :src="keep.creator.picture" alt="User profile picture.">
+            </div>
         </div>
     </div>
     <DetailModalWrapper id="detailModal"/>
@@ -21,6 +24,7 @@ export default {
     props: {keep: {type: Keeps, required: true}},
     setup(props){
         async function getKeepById(){
+            await keepService.updateViews(props.keep.id)
             await keepService.getKeepById(props.keep.id)
         }
     return { 
@@ -37,23 +41,31 @@ export default {
 
 <style lang="scss" scoped>
 .keepCard{
-    height: 200px;
     background-position: center;
     background-size: cover;
     border-radius: 5px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.408);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.462);
     color: white;
     text-shadow: 2px 3px 3px black;
 }
 .keepCard:hover{
-    height: 200px;
     background-position: center;
     background-size: cover;
     border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.462);
     color: white;
     text-shadow: 2px 3px 3px black;
-    transform: scale(1.04);
+    transform: scale(1.02);
     cursor: pointer;
+}
+.card-child{
+    width: 316px;
+    position: absolute;
+    // outline: solid 2px red;
+}
+.card-img{
+    visibility: hidden;
+    opacity: 1;
 }
 .profile-pic{
     height: 50px;

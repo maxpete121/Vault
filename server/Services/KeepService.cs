@@ -23,6 +23,7 @@ public class KeepService(KeepRepository repo){
     internal Keeps UpdateKeep(Keeps updateKeepData, int keepId){
         Keeps originalKeep = GetOneKeepById(keepId);
         originalKeep.Name = updateKeepData.Name?.Length > 0 ? updateKeepData.Name : originalKeep.Name;
+        originalKeep.Views = updateKeepData.Views > 0 ? updateKeepData.Views : originalKeep.Views;
         originalKeep.Description = updateKeepData.Description?.Length > 0 ? updateKeepData.Description : originalKeep.Description;
         originalKeep.Img = updateKeepData.Img?.Length > 0 ? updateKeepData.Img : originalKeep.Img;
         Keeps newKeep = repo.UpdateKeep(originalKeep);

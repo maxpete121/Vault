@@ -7,23 +7,41 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="d-flex justify-content-center mb-4">
+          <div class="stat-container d-flex align-items-center">
+            <div v-if="activeKeep !== null" class="d-flex stat-child-view pt-1 pe-2 ps-2 align-items-center">
+              <h6>Views</h6>
+              <h6 class="ms-2">{{ activeKeep.views }}</h6>
+            </div>
+            <div v-if="activeKeep !== null" class="d-flex stat-child-kept pt-1 pe-2 ps-2 align-items-center">
+              <h6>Kept</h6>
+              <h6 class="ms-2">{{ activeKeep.kept }}</h6>
+            </div>
+          </div>
+        </div>
         <div v-if="activeKeep !== null" class="d-flex">
+          <div>
+            <router-link :to="{ name: 'Profile', params: {profileId: activeKeep.creatorId} }">
+                <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex align-items-center mb-2" >
+                    <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="">
+                    <h5 class="ms-2 text-dark">{{ activeKeep.creator.name }}</h5>
+                </div>
+            </router-link>
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
-            <div class="ms-3">
-                <router-link :to="{ name: 'Profile', params: {profileId: activeKeep.creatorId} }">
-                    <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex align-items-center mb-2" >
-                        <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="">
-                        <h5 class="ms-2 text-dark">{{ activeKeep.creator.name }}</h5>
-                    </div>
-                </router-link>
+          </div>
+            <div class="mt-2">
+              <div class="d-flex justify-content-center">
+                <h4 class="fst-italic">{{ activeKeep.name }}</h4>
+              </div>
+              <div class="ms-4 mt-4">
                 <h6>Description</h6>
                 <p>{{ activeKeep.description }}</p>
+              </div>
             </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -52,6 +70,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.stat-container{
+  outline: solid 2px black;
+  border-radius: 15px;
+}
+.stat-child-view{
+  border-right: solid 1px black;
+}
+.stat-child-kept{
+  
+}
 .image-resize{
     max-width: 300px;
     max-height: 700px;
