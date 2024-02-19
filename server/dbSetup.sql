@@ -17,6 +17,7 @@ CREATE TABLE keeps(
   description VARCHAR(400) NOT NULL,
   img VARCHAR(500) NOT NULL,
   views INT,
+  kept INT,
   Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 

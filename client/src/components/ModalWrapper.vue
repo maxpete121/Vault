@@ -85,6 +85,7 @@ export default {
     setup() {
         let keepData = ref({})
         let vaultData = ref({})
+        async function createKeep(){}
         return {
             keepData,
             vaultData

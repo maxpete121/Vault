@@ -63,7 +63,7 @@ export default {
     cursor: pointer;
 }
 .card-child{
-    width: 280px;
+    width: 260px;
     position: absolute;
 }
 .card-img{

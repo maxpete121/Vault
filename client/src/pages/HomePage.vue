@@ -1,7 +1,7 @@
 <template>
   <section class="container-fluid">
     <div class=" justify-content-center container-main mt-3">
-      <div class="m-3" v-for="keep in keeps">
+      <div class="m-2" v-for="keep in keeps">
         <KeepComponentCard :keep="keep"/>
       </div>
     </div>

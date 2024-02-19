@@ -7,8 +7,8 @@ public class Keeps : RepoItem<int>{
     public string Description {get; set;}
     public string Img {get; set;}
     public int Views {get; set;}
-    public Account Creator {get; set;}
     public int Kept {get; set;}
+    public Account Creator {get; set;}
 }
 
 public class VaultedKeep : Keeps{

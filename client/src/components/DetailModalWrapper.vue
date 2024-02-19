@@ -42,7 +42,7 @@
       </div>
       <div class="modal-footer">
         <div>
-          <form action="">
+          <form @submit.prevent="createVaultKeep()" action="">
             <div class="d-flex add-keep">
               <select v-model="vaultData" class="form-control w-50 me-2" name="" id="">
                 <option v-for="yourVault in yourVaults" :value="yourVault.id">{{yourVault.name}}</option>
@@ -65,6 +65,7 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import {profileService} from '../services/ProfileService.js';
 import {vaultKeepService} from '../services/VaultKeepService.js';
+import {keepService} from '../services/KeepService.js'
 export default {
     setup(){
       let useActiveKeep = computed(()=> AppState.activeKeep)
@@ -76,8 +77,11 @@ export default {
 
         async function createVaultKeep(){
           await vaultKeepService.createVaultKeep(vaultData.value, useActiveKeep.value.id)
+          await keepService.updateKept(useActiveKeep.value.id)
+          await keepService.getKeepById(useActiveKeep.value.id)
         }
     return { 
+      createVaultKeep,
         vaultData,
         getProfileById,
         activeKeep: computed(()=> AppState.activeKeep),
@@ -94,7 +98,7 @@ export default {
   width: 300px;
 }
 .stat-container{
-  outline: solid 2px black;
+  outline: solid 1px black;
   border-radius: 15px;
 }
 .stat-child-view{
