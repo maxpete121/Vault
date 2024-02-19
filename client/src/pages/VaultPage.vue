@@ -6,10 +6,10 @@
                 <h4 class="fst-italic mt-2">{{ activeVault.name }}</h4>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div v-if="activeVault.creatorId == account.id" class="row justify-content-center">
             <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-outline-dark me-2">Add Keep</button>
                 <button class="btn btn-outline-dark">Make Private</button>
+                <button class="btn btn-outline-danger ms-2">Delete</button>
             </div>
         </div>
         <div class="row justify-content-center mt-2">
@@ -47,7 +47,8 @@ export default {
         }
     return { 
         activeVault: computed(()=> AppState.activeVault),
-        keeps: computed(()=> AppState.vaultsKeeps)
+        keeps: computed(()=> AppState.vaultsKeeps),
+        account: computed(()=> AppState.account)
      }
     }, components: { VaultKeepCard }
 };

@@ -11,6 +11,10 @@ class VaultService{
         AppState.activeVault = new Vaults(response.data)
     }
 
+    async createVault(vaultData){
+        let response = await api.post(`api/vaults`, vaultData)
+    }
+
     async getVaultKeeps(vaultId){
         let response = await api.get(`api/vaults/${vaultId}/keeps`)
         let vaultKeeps = await response.data.map(keep => new Keeps(keep))

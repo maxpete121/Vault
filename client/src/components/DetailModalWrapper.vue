@@ -10,11 +10,11 @@
         <div class="d-flex justify-content-center mb-4">
           <div class="stat-container d-flex align-items-center">
             <div v-if="activeKeep !== null" class="d-flex stat-child-view pt-1 pe-2 ps-2 align-items-center">
-              <h6>Views</h6>
+              <h6 class="fst-italic">Views</h6>
               <h6 class="ms-2">{{ activeKeep.views }}</h6>
             </div>
             <div v-if="activeKeep !== null" class="d-flex stat-child-kept pt-1 pe-2 ps-2 align-items-center">
-              <h6>Kept</h6>
+              <h6 class="fst-italic">K</h6>
               <h6 class="ms-2">{{ activeKeep.kept }}</h6>
             </div>
           </div>
@@ -79,6 +79,7 @@ export default {
           await vaultKeepService.createVaultKeep(vaultData.value, useActiveKeep.value.id)
           await keepService.updateKept(useActiveKeep.value.id)
           await keepService.getKeepById(useActiveKeep.value.id)
+          vaultData.value = ''
         }
     return { 
       createVaultKeep,

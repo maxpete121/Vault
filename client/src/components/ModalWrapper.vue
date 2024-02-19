@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="text-center">
+                    <form @submit.prevent="createKeep()" action="" class="text-center">
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-8 text-center">
@@ -24,7 +24,7 @@
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-10 text-center">
                                     <label for="">Description</label>
-                                    <textarea v-model="keepData.description" class="form-control" name="description" id="" cols="40" rows="5"></textarea>
+                                    <textarea v-model="keepData.description" class="form-control" required name="description" id="" cols="40" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="text-center">
+                    <form @submit.prevent="createVault()" action="" class="text-center">
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-8 text-center">
@@ -62,7 +62,7 @@
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-10 text-center">
                                     <label for="">Description</label>
-                                    <textarea v-model="vaultData.description" class="form-control" name="descriptionTwo" id="" cols="40" rows="5"></textarea>
+                                    <textarea v-model="vaultData.description" class="form-control" required name="descriptionTwo" id="" cols="40" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -81,12 +81,23 @@
 <script>
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
+import { keepService } from '../services/KeepService.js';
+import {vaultService} from '../services/VaultService.js';
 export default {
     setup() {
         let keepData = ref({})
         let vaultData = ref({})
-        async function createKeep(){}
+        async function createKeep(){
+            await keepService.createKeep(keepData.value)
+            keepData.value = {}
+        }
+        async function createVault(){
+            await vaultService.createVault(vaultData.value)
+            vaultData.value = {}
+        }
         return {
+            createVault,
+            createKeep,
             keepData,
             vaultData
         }

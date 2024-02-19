@@ -37,6 +37,8 @@ export default {
 <style lang="scss" scoped>
 .keep-card{
     height: 200px;
+    background-position: center;
+    background-size: cover;
 }
 .profile-pic{
     height: 50px;
