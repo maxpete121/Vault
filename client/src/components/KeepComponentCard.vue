@@ -1,5 +1,5 @@
 <template>
-    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex align-items-end p-2">
+    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex justify-content-center align-items-end p-2">
         <img class="card-img" :src="keep.img" alt="">
         <div class="d-flex card-child align-items-center justify-content-between">
             <div>
@@ -59,13 +59,11 @@ export default {
     cursor: pointer;
 }
 .card-child{
-    width: 316px;
+    width: 280px;
     position: absolute;
-    // outline: solid 2px red;
 }
 .card-img{
     visibility: hidden;
-    opacity: 1;
 }
 .profile-pic{
     height: 50px;

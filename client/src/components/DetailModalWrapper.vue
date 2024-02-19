@@ -77,9 +77,6 @@ export default {
 .stat-child-view{
   border-right: solid 1px black;
 }
-.stat-child-kept{
-  
-}
 .image-resize{
     max-width: 300px;
     max-height: 700px;

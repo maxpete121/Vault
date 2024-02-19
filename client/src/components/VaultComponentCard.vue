@@ -1,5 +1,5 @@
 <template>
-    <div :style="newBg" class="vault d-flex align-items-end p-2">
+    <div @click="getVaultById()" :style="newBg" class="vault d-flex align-items-end p-2">
         <div class=" align-items-center">
             <h6 class="me-4">{{ userVault.name }}</h6>
             <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
@@ -12,10 +12,17 @@
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { Vaults } from '../models/Vaults';
+import { vaultService } from '../services/VaultService';
+import { router } from '../router';
 export default {
     props: {userVault: {type: Vaults, required: true}},
     setup(props){
+        async function getVaultById(){
+            await vaultService.getVaultById(props.userVault.id)
+            router.push({ name: 'Vault', params: { vaultId: props.userVault.id } })
+        }
     return { 
+        getVaultById,
         account: computed(()=> AppState.account),
         newBg: computed(()=>{
             let style = `background-image: url('${props.userVault.img}');`
