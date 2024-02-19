@@ -1,8 +1,8 @@
 <template>
     <div :style="newBg" class="vault d-flex align-items-end p-2">
-        <div class="d-flex justify-content-between">
-            <h5>{{ userVault.name }}</h5>
-            <button class="btn btn-outline-danger"><i class="mdi mdi-delete"></i></button>
+        <div class=" align-items-center">
+            <h6 class="me-4">{{ userVault.name }}</h6>
+            <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
     </div>
 </template>
@@ -29,10 +29,23 @@ export default {
 
 <style lang="scss" scoped>
 .vault{
-    height: 150px;
+    height: 200px;
     background-position: center;
     background-size: cover;
     color: white;
     text-shadow: 3px 3px 4px black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.466);
+    overflow-x: auto;
+}
+.vault:hover{
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    text-shadow: 3px 3px 4px black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.466);
+    overflow-x: auto;
+    transform: scale(1.03);
+    cursor: pointer;
 }
 </style>
