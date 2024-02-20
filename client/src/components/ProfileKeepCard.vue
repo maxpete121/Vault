@@ -2,7 +2,6 @@
     <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keep-card d-flex flex-column justify-content-end p-2">
         <div class="d-flex align-items-center justify-content-between">
                 <h5 class="">{{ keep.name }}</h5>
-                <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
     </div>
     <DetailModalWrapper id="detailModal"/>

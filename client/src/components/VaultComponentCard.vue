@@ -1,5 +1,14 @@
 <template>
-    <div @click="getVaultById()" :style="newBg" class="vault d-flex flex-column justify-content-end p-2">
+    <div v-if="userVault.isPrivate == false" @click="getVaultById(userVault.id)" :style="newBg" class="vault d-flex flex-column justify-content-end p-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="me-4">{{ userVault.name }}</h5>
+            <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
+        </div>
+    </div>
+    <div v-else-if="userVault.isPrivate == true" @click="getVaultById(userVault.id)" :style="newBg" class="vault d-flex flex-column justify-content-between p-2">
+        <div class="d-flex justify-content-start">
+            <h3><i class="mdi mdi-lock"></i></h3>
+        </div>
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="me-4">{{ userVault.name }}</h5>
             <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
@@ -17,8 +26,8 @@ import { router } from '../router';
 export default {
     props: {userVault: {type: Vaults, required: true}},
     setup(props){
-        async function getVaultById(){
-            await vaultService.getVaultById(props.userVault.id)
+        async function getVaultById(vaultId){
+            await vaultService.getVaultById(vaultId)
             router.push({ name: 'Vault', params: { vaultId: props.userVault.id } })
         }
     return { 

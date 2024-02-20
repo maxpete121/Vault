@@ -52,9 +52,9 @@
           </form>
         </div>
         <div v-if="activeKeep !== null"> 
-          <button v-if="account.id == activeKeep.creatorId" class="btn btn-danger">Delete</button>
+          <button @click="deleteKeep()" v-if="account.id == activeKeep.creatorId" class="btn btn-danger">Delete</button>
         </div>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button @click="clearActive()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -78,13 +78,24 @@ export default {
             await profileService.getProfileById(profileId)
         }
 
+        async function clearActive(){
+          AppState.activeKeep = null
+        }
+
         async function createVaultKeep(){
           await vaultKeepService.createVaultKeep(vaultData.value, useActiveKeep.value.id)
           await keepService.updateKept(useActiveKeep.value.id)
           await keepService.getKeepById(useActiveKeep.value.id)
           vaultData.value = ''
         }
+
+        async function deleteKeep(){
+          await keepService.deleteKeep(useActiveKeep.value.id)
+          Modal.getOrCreateInstance("#detailModal").hide()
+        }
     return { 
+      clearActive,
+      deleteKeep,
       createVaultKeep,
         vaultData,
         getProfileById,

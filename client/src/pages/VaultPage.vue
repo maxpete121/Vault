@@ -8,7 +8,8 @@
         </div>
         <div v-if="activeVault.creatorId == account.id" class="row justify-content-center">
             <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-outline-dark">Make Private</button>
+                <button v-if="activeVault.isPrivate == false" class="btn btn-outline-dark">Make Private</button>
+                <button v-if="activeVault.isPrivate == true" class="btn btn-outline-dark">Make Public</button>
                 <button class="btn btn-outline-danger ms-2">Delete</button>
             </div>
         </div>
@@ -41,6 +42,8 @@ export default {
             vaultService.getVaultById(route.params.vaultId)
             getVaultKeeps()
         })
+
+        async function updatePrivate(){}
 
         async function getVaultKeeps(){
             await vaultService.getVaultKeeps(route.params.vaultId)
