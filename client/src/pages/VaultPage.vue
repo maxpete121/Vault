@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-3" v-for="keep in keeps">
+            <div class="col-3 mt-2" v-for="keep in keeps">
             <VaultKeepCard :keeper="keep"/>
             </div>
         </div>

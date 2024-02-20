@@ -88,4 +88,18 @@ public class KeepController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpPut("{keepId}/views")]
+    public ActionResult<Keeps> UpdateKeepView([FromBody]Keeps KeepData, int keepId){
+        try
+        {
+            Keeps keep = keepService.UpdateKeepView(KeepData, keepId);
+            return Ok(keep);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
 }

@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <div>
+        <div v-if="activeKeep !== null">
           <form @submit.prevent="createVaultKeep()" action="">
             <div class="d-flex add-keep">
               <select v-model="vaultData" class="form-control w-50 me-2" name="" id="">
@@ -50,6 +50,9 @@
               <button class="btn btn-secondary">Add to Vault</button>
             </div>
           </form>
+        </div>
+        <div v-if="activeKeep !== null"> 
+          <button v-if="account.id == activeKeep.creatorId" class="btn btn-danger">Delete</button>
         </div>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
@@ -87,7 +90,8 @@ export default {
         getProfileById,
         activeKeep: computed(()=> AppState.activeKeep),
         vaults: computed(()=> AppState.userVaults),
-        yourVaults: computed(()=> AppState.yourVaults)
+        yourVaults: computed(()=> AppState.yourVaults),
+        account: computed(()=> AppState.account)
      }
     }
 };

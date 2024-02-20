@@ -79,6 +79,30 @@ public class KeepRepository(IDbConnection db){
         return keeps;
     }
 
+    internal Keeps UpdateKeepView(Keeps updateData){
+        string sql = @"
+        UPDATE keeps SET
+        name = @name,
+        description = @description,
+        img = @img,
+        views = @views,
+        kept = @kept
+        WHERE id = @id;
+
+        SELECT
+        keeps.*,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.id = @id
+        ";
+        Keeps keeps = db.Query<Keeps, Account, Keeps>(sql, (keep, account)=>{
+            keep.Creator = account;
+            return keep;
+        }, updateData).FirstOrDefault();
+        return keeps;
+    }
+
     internal void DeleteKeep(int keepId){
         string sql = @"
         DELETE FROM keeps
