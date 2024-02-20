@@ -24,7 +24,7 @@ public class VaultService(VaultsRepository repo){
          originalVault.Name = vaultData.Name?.Length > 0 ? vaultData.Name : originalVault.Name;
          originalVault.Description = vaultData.Description?.Length > 0 ? vaultData.Description : originalVault.Description;
          originalVault.Img = vaultData.Img?.Length > 0 ? vaultData.Img : originalVault.Img;
-         originalVault.IsPrivate = vaultData.IsPrivate ? vaultData.IsPrivate : originalVault.IsPrivate;
+         originalVault.IsPrivate = vaultData.IsPrivate != originalVault.IsPrivate ? vaultData.IsPrivate : originalVault.IsPrivate;
          Vaults newVault = repo.UpdateVault(originalVault);
          return newVault;
         }else{

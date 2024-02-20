@@ -24,9 +24,19 @@ class VaultService{
 
     async getVaultKeeps(vaultId){
         let response = await api.get(`api/vaults/${vaultId}/keeps`)
-        let vaultKeeps = await response.data.map(keep => new Keeps(keep))
-        AppState.vaultsKeeps = vaultKeeps
-        console.log(vaultKeeps)
+            let vaultKeeps = await response.data.map(keep => new Keeps(keep))
+            AppState.vaultsKeeps = vaultKeeps
+    }
+
+    async updatePrivate(vaultId){
+        let vaultData = AppState.activeVault
+        if(vaultData.isPrivate == false){
+            vaultData.isPrivate = true
+        }else{
+            vaultData.isPrivate = false
+        }
+        let response = api.put(`api/vaults/${vaultId}`, vaultData)
+        AppState.activeVault = new Vaults((await response).data)
     }
 }
 

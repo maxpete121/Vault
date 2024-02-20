@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS accounts(
   name varchar(255) COMMENT 'User Name',
   email varchar(255) COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture',
-  coverImg varchar(500) COMMENT 'User CoverImg'
+  coverImg varchar(500) DEFAULT 'https://i.redd.it/d2hd73xxwvaa1.jpg' COMMENT 'User CoverImg'
 ) default charset utf8 COMMENT '';
 
 
@@ -77,3 +77,9 @@ CREATE TABLE vaultkeeps(
         *
         FROM vaults
         WHERE creatorId = '65837617fb48f6cd659dd941' AND isPrivate = false
+
+            UPDATE accounts SET 
+              name = 'Yes',
+              picture = 'none',
+              coverImg ='none'
+            WHERE id = '65837617fb48f6cd659dd941'

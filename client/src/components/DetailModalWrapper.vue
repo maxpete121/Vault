@@ -69,6 +69,7 @@ import { computed, ref, onMounted } from 'vue';
 import {profileService} from '../services/ProfileService.js';
 import {vaultKeepService} from '../services/VaultKeepService.js';
 import {keepService} from '../services/KeepService.js'
+import Pop from '../utils/Pop';
 export default {
     setup(){
       let useActiveKeep = computed(()=> AppState.activeKeep)
@@ -87,6 +88,7 @@ export default {
           await keepService.updateKept(useActiveKeep.value.id)
           await keepService.getKeepById(useActiveKeep.value.id)
           vaultData.value = ''
+          Pop.success('Added to vault.')
         }
 
         async function deleteKeep(){

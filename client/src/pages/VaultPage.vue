@@ -8,8 +8,8 @@
         </div>
         <div v-if="activeVault.creatorId == account.id" class="row justify-content-center">
             <div class="col-4 d-flex justify-content-center">
-                <button v-if="activeVault.isPrivate == false" class="btn btn-outline-dark">Make Private</button>
-                <button v-if="activeVault.isPrivate == true" class="btn btn-outline-dark">Make Public</button>
+                <button @click="updatePrivate()" v-if="activeVault.isPrivate == false" class="btn btn-outline-dark">Make Private</button>
+                <button @click="updatePrivate()" v-if="activeVault.isPrivate == true" class="btn btn-outline-dark">Make Public</button>
                 <button v-if="account.id == activeVault.creatorId" @click="deleteVault()" class="btn btn-outline-danger ms-2">Delete</button>
             </div>
         </div>
@@ -42,8 +42,8 @@ export default {
         let useActiveVault = computed(()=> AppState.activeVault)
         onMounted(()=>{
             keepService.getAllKeeps()
-            vaultService.getVaultById(route.params.vaultId)
             getVaultKeeps()
+            vaultService.getVaultById(route.params.vaultId)
         })
 
         async function deleteVault(){
@@ -54,12 +54,18 @@ export default {
             }
         }
 
-        async function updatePrivate(){}
+        async function updatePrivate(){
+            await vaultService.updatePrivate(route.params.vaultId)
+        }
 
         async function getVaultKeeps(){
-            await vaultService.getVaultKeeps(route.params.vaultId)
+            let keep = await vaultService.getVaultKeeps(route.params.vaultId)
+            if(keep == 'none'){
+             router.push({ name: 'Home'})
+            }
         }
     return { 
+        updatePrivate,
         deleteVault,
         activeVault: computed(()=> AppState.activeVault),
         keeps: computed(()=> AppState.vaultsKeeps),

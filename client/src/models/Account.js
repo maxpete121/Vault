@@ -4,7 +4,8 @@ export class Account {
     this.email = data.email
     this.name = data.name
     this.picture = data.picture
-    this.coverImg = data.coverImg || 'https://i.redd.it/d2hd73xxwvaa1.jpg'
+    this.coverImg = data.coverImg
     // TODO add additional properties if needed
   }
+
 }
