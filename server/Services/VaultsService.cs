@@ -46,4 +46,9 @@ public class VaultService(VaultsRepository repo){
         return myVaults;
         }else{throw new Exception("You must be logged in to make this request");}
     }
+
+    internal List<Vaults> GetPrivateVaults(string userId){
+        List<Vaults> vaults = repo.GetPrivateVaults(userId);
+        return vaults;
+    }
 }

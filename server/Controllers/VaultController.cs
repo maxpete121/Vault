@@ -92,4 +92,20 @@ public class VaultController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpGet("/private")]
+    [Authorize]
+     public async Task<ActionResult<List<Vaults>>>  GetPrivateVaults(){
+        try
+        {
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            List<Vaults> vaults = vaultService.GetPrivateVaults(userInfo.Id);
+            return Ok(vaults);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+     }
 }

@@ -41,9 +41,9 @@ export default {
         let route = useRoute()
         let useActiveVault = computed(()=> AppState.activeVault)
         onMounted(()=>{
+            getVaultById()
             keepService.getAllKeeps()
             getVaultKeeps()
-            vaultService.getVaultById(route.params.vaultId)
         })
 
         async function deleteVault(){
@@ -51,6 +51,14 @@ export default {
                 let message = await vaultService.deleteVault(route.params.vaultId)
                 router.push({ name: 'Home'})
                 Pop.success(message)
+            }
+        }
+
+        async function getVaultById(){
+            try {
+                await vaultService.getVaultById(route.params.vaultId)
+            } catch (error) {
+                router.push({ name: 'Home'})
             }
         }
 

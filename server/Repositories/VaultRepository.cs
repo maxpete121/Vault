@@ -87,4 +87,20 @@ public class VaultsRepository(IDbConnection db){
         }, new{userId}).ToList();
         return myVaults;
     }
+
+    internal List<Vaults> GetPrivateVaults(string userId){
+        string sql = @"
+        SELECT
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON vaults.creatorId = accounts.id
+        WHERE vaults.creatorId = @userId AND vaults.isPrivate = true
+        ";
+        List<Vaults> privVaults = db.Query<Vaults, Account, Vaults>(sql, (vault, account)=>{
+            vault.Creator = account;
+            return vault;
+        }, new{userId}).ToList();
+        return privVaults;
+    }
 }

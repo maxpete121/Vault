@@ -10,7 +10,7 @@
   </div>
   <div class="row justify-content-center mt-2">
     <div class="d-flex justify-content-center">
-      <button class="btn btn-outline-dark">View Profile Page <i class="mdi mdi-account"></i></button>
+      <button @click="goToProfile()" class="btn btn-outline-dark">View Profile Page <i class="mdi mdi-account"></i></button>
     </div>
   </div>
   <div class="row mt-2 justify-content-center">
@@ -46,10 +46,15 @@
 import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
 import {accountService} from '../services/AccountService.js'
+import { router } from '../router';
 export default {
   setup() {
     let useAccount = computed(()=> AppState.account)
     let userData = ref({})
+
+    async function goToProfile(){
+      router.push({ name: 'Profile', params: {profileId: useAccount.value.id}})
+    }
 
     async function updateAccount(){
       if(window.confirm('Do you want to save these changes?')){
@@ -58,6 +63,7 @@ export default {
       }
     }
     return {
+      goToProfile,
       updateAccount,
       userData,
       coverImg: computed(()=>{
