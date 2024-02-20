@@ -2,7 +2,6 @@
     <div v-if="userVault.isPrivate == false" @click="getVaultById(userVault.id)" :style="newBg" class="vault d-flex flex-column justify-content-end p-2">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="me-4">{{ userVault.name }}</h5>
-            <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
     </div>
     <div v-else-if="userVault.isPrivate == true" @click="getVaultById(userVault.id)" :style="newBg" class="vault d-flex flex-column justify-content-between p-2">
@@ -11,7 +10,6 @@
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="me-4">{{ userVault.name }}</h5>
-            <button class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
     </div>
 </template>

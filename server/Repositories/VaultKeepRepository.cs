@@ -65,4 +65,20 @@ public class VaultKeepRepository(IDbConnection db){
         ";
         db.Execute(sql, new{vaultKeepId});
     }
+
+        internal Vaults GetVaultById(int vaultId){
+        string sql=@"
+        SELECT
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON vaults.creatorId = accounts.id
+        WHERE vaults.id = @vaultId
+        ";
+        Vaults vaults = db.Query<Vaults, Account, Vaults>(sql, (vault, account)=>{
+            vault.Creator = account;
+            return vault;
+    }, new{vaultId}).FirstOrDefault();
+    return vaults;
+    }
 }

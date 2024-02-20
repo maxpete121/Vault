@@ -63,7 +63,7 @@ public class KeepController : ControllerBase{
         try
         {
         Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
-        Keeps keeps = keepService.UpdateKeep(updateKeepData, keepId);
+        Keeps keeps = keepService.UpdateKeep(updateKeepData, keepId, userInfo.Id);
         return Ok(keeps);
         }
         catch (Exception error)

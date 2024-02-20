@@ -10,7 +10,7 @@
             <div class="col-4 d-flex justify-content-center">
                 <button v-if="activeVault.isPrivate == false" class="btn btn-outline-dark">Make Private</button>
                 <button v-if="activeVault.isPrivate == true" class="btn btn-outline-dark">Make Public</button>
-                <button class="btn btn-outline-danger ms-2">Delete</button>
+                <button v-if="account.id == activeVault.creatorId" @click="deleteVault()" class="btn btn-outline-danger ms-2">Delete</button>
             </div>
         </div>
         <div class="row justify-content-center mt-2">
@@ -34,14 +34,25 @@ import { vaultService } from '../services/VaultService';
 import { useRoute } from 'vue-router';
 import VaultKeepCard from '../components/VaultKeepCard.vue';
 import { keepService } from '../services/KeepService';
+import Pop from '../utils/Pop';
+import { router } from '../router';
 export default {
     setup(){
         let route = useRoute()
+        let useActiveVault = computed(()=> AppState.activeVault)
         onMounted(()=>{
             keepService.getAllKeeps()
             vaultService.getVaultById(route.params.vaultId)
             getVaultKeeps()
         })
+
+        async function deleteVault(){
+            if(window.confirm('Are you sure you want to delete this Keep?')){
+                let message = await vaultService.deleteVault(route.params.vaultId)
+                router.push({ name: 'Home'})
+                Pop.success(message)
+            }
+        }
 
         async function updatePrivate(){}
 
@@ -49,6 +60,7 @@ export default {
             await vaultService.getVaultKeeps(route.params.vaultId)
         }
     return { 
+        deleteVault,
         activeVault: computed(()=> AppState.activeVault),
         keeps: computed(()=> AppState.vaultsKeeps),
         account: computed(()=> AppState.account)

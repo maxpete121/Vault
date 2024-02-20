@@ -20,18 +20,20 @@ public class KeepService(KeepRepository repo){
         return keeps;
     }
 
-    internal Keeps UpdateKeep(Keeps updateKeepData, int keepId){
+    internal Keeps UpdateKeep(Keeps updateKeepData, int keepId,string userId){
         Keeps originalKeep = GetOneKeepById(keepId);
+        if(originalKeep.CreatorId == userId){
         originalKeep.Name = updateKeepData.Name?.Length > 0 ? updateKeepData.Name : originalKeep.Name;
-        originalKeep.Kept = updateKeepData.Kept > 0 ? updateKeepData.Kept : originalKeep.Kept;
         originalKeep.Description = updateKeepData.Description?.Length > 0 ? updateKeepData.Description : originalKeep.Description;
         originalKeep.Img = updateKeepData.Img?.Length > 0 ? updateKeepData.Img : originalKeep.Img;
         Keeps newKeep = repo.UpdateKeep(originalKeep);
         return newKeep;
+        }else{throw new Exception("You are not authorized to make this request.");}
     }
 
     internal Keeps UpdateKeepView(Keeps keepData, int keepId){
         Keeps originalKeep = GetOneKeepById(keepId);
+        originalKeep.Kept = keepData.Kept > 0 ? keepData.Kept : originalKeep.Kept;
         originalKeep.Views = keepData.Views > 0 ? keepData.Views : originalKeep.Views;
         Keeps newKeep = repo.UpdateKeepView(originalKeep);
         return newKeep;

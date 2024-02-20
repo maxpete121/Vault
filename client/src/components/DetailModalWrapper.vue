@@ -90,8 +90,10 @@ export default {
         }
 
         async function deleteKeep(){
-          await keepService.deleteKeep(useActiveKeep.value.id)
-          Modal.getOrCreateInstance("#detailModal").hide()
+          if(window.confirm(`Are you sure you want to delete this vault?`)){
+            await keepService.deleteKeep(useActiveKeep.value.id)
+            Modal.getOrCreateInstance("#detailModal").hide()
+          }
         }
     return { 
       clearActive,

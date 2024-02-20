@@ -72,3 +72,8 @@ CREATE TABLE vaultkeeps(
         FROM vaults
         JOIN accounts ON vaults.creatorId = accounts.id
         WHERE vaults.creatorId = '65837617fb48f6cd659dd941'
+
+        SELECT
+        *
+        FROM vaults
+        WHERE creatorId = '65837617fb48f6cd659dd941' AND isPrivate = false

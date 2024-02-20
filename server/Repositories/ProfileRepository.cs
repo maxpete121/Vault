@@ -35,9 +35,10 @@ public class ProfileRepository(IDbConnection db){
         SELECT
         *
         FROM vaults
-        WHERE creatorId = @profileId;
+        WHERE creatorId = @profileId AND isPrivate = false
         ";
         List<Vaults> vaults = db.Query<Vaults>(sql, new{profileId}).ToList();
         return vaults;
     }
+
 }

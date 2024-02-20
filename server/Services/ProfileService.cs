@@ -17,4 +17,5 @@ public class ProfileService(ProfileRepository repo){
         List<Vaults> vaults = repo.GetUserVaults(profileId);
         return vaults;
     }
+
 }

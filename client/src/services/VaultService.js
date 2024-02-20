@@ -13,6 +13,13 @@ class VaultService{
 
     async createVault(vaultData){
         let response = await api.post(`api/vaults`, vaultData)
+        let newVault = new Vaults(response.data)
+        AppState.userVaults.unshift(newVault)
+    }
+
+    async deleteVault(vaultId){
+        let response = await api.delete(`api/vaults/${vaultId}`)
+        return response.data
     }
 
     async getVaultKeeps(vaultId){
