@@ -12,8 +12,8 @@
     <div class="collapse navbar-collapse align-self-center" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <div class="dropdown">
-            <h5 class="text-dark" type="button" data-bs-toggle="dropdown">Create</h5>
+          <div v-if="account.id" class="dropdown">
+            <h4 class="text-dark " type="button" data-bs-toggle="dropdown">Create</h4>
             <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-end p-0" aria-labelledby="authDropdown">
             <div class="list-group">
                 <div class="list-group-item dropdown-item list-group-item-action">
@@ -38,10 +38,11 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import ModalWrapper from './ModalWrapper.vue';
+import { AppState } from '../AppState';
 export default {
   setup() {
 
@@ -53,6 +54,7 @@ export default {
 
     return {
       theme,
+      account: computed(()=> AppState.account),
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)

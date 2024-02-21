@@ -65,7 +65,7 @@ export default {
 
 @media screen and (min-width: 576px){
     .card-child{
-        width: 260px;
+        width: 310px;
         position: absolute;
     }
 }

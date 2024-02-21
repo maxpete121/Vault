@@ -40,6 +40,16 @@ export default {
     background-size: cover;
     color: white;
     text-shadow: 2px 2px 2px black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.455);
+}
+.keep-card:hover{
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.455);
+    transform: scale(1.02);
 }
 .profile-pic{
     height: 50px;

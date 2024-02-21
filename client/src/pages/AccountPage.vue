@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="row mt-2 justify-content-center">
-    <div class="col-3 text-center d-flex flex-column align-items-center edit-card">
+    <div class="col-lg-3 col-11 text-center d-flex flex-column align-items-center edit-card">
       <h4 class="fst-italic">Edit your profile...</h4>
       <form @submit.prevent="updateAccount()" class="d-flex flex-column">
         <div class="d-flex justify-content-between align-items-baseline mt-2 form-field">
@@ -34,10 +34,10 @@
         </div>
       </form>
     </div>
-    <div class="col-3">
+    <!-- <div class="col-3">
       <h4>Private Vaults...</h4>
       <div></div>
-    </div>
+    </div> -->
   </div>
 </section>
 </template>
