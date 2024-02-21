@@ -4,7 +4,7 @@ import DetailModalWrapper from './DetailModalWrapper.vue';
     <div @click="getKeepById(), openModal()" type="button" :title="keeper.name" :style="newBg" class="keep-card p-2 d-flex flex-column justify-content-end">
         <div class="d-flex justify-content-between text-light">
             <h4>{{ keeper.name }}</h4>
-            <button @click="deleteVaultKeep(keeper.vaultKeepId)" class="btn btn-danger">Remove</button>
+            <button v-if="account.id == activeVault.creatorId" @click="deleteVaultKeep(keeper.vaultKeepId)" class="btn btn-danger">Remove</button>
         </div>
     </div>
     <DetailModalWrapper id="detailModal"/>
@@ -46,6 +46,8 @@ export default {
             }
         }
     return { 
+        activeVault: computed(()=> AppState.activeVault),
+        account: computed(()=> AppState.account),
         openModal,
         deleteVaultKeep,
         getKeepById,

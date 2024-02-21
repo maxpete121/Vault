@@ -29,7 +29,7 @@
 <script>
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState';
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { profileService } from '../services/ProfileService';
 import VaultComponentCard from '../components/VaultComponentCard.vue';
 import KeepComponentCard from '../components/KeepComponentCard.vue';
@@ -40,11 +40,17 @@ export default {
             getUserVaults()
             getUserKeeps()
         })
+        let useAccount = computed(()=> AppState.account)
         let useUserAccount = computed(() => AppState.activeUserProfile)
+        watch(useAccount, getUserVaults)
         const route = useRoute()
         async function getUserVaults(){
-            await profileService.getProfileById(route.params.profileId)
-            await profileService.getUserVaults(route.params.profileId)
+            if(useAccount.value.id == route.params.profileId){
+                await profileService.getMyVaults()
+            }else{
+                await profileService.getProfileById(route.params.profileId)
+                await profileService.getUserVaults(route.params.profileId)
+            }
         }
         async function getUserKeeps(){
             await profileService.getUserKeeps(route.params.profileId)

@@ -19,11 +19,11 @@
             </div>
           </div>
         </div>
-        <div v-if="activeKeep !== null" class="d-flex">
-          <div>
+        <div v-if="activeKeep !== null" class="d-lg-flex">
+          <div class="d-flex flex-column align-items-center">
             <router-link :to="{ name: 'Profile', params: {profileId: activeKeep.creatorId} }">
-                <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex align-items-center mb-2" >
-                    <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="">
+                <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex justify-content-center align-items-center mb-2" >
+                    <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="User picture.">
                     <h5 class="ms-2 text-dark">{{ activeKeep.creator.name }}</h5>
                 </div>
             </router-link>
@@ -41,10 +41,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <div v-if="activeKeep !== null && account.id == activeKeep.creatorId">
+        <div v-if="activeKeep !== null && account.id">
           <form @submit.prevent="createVaultKeep()" action="">
             <div class="d-flex add-keep">
-              <select v-model="vaultData" class="form-control w-50 me-2" name="" id="">
+              <select v-model="vaultData" class="form-control w-50 me-lg-2" name="" id="">
                 <option v-for="yourVault in yourVaults" :value="yourVault.id">{{yourVault.name}}</option>
               </select>
               <button class="btn btn-secondary">Add to Vault</button>

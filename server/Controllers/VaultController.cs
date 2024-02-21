@@ -33,10 +33,11 @@ public class VaultController : ControllerBase{
     }
 
     [HttpGet("{vaultId}")]
-    public ActionResult<Vaults> GetVaultById(int vaultId){
+    public async Task<ActionResult<Vaults>> GetVaultById(int vaultId){
         try
         {
-            Vaults vaults = vaultService.GetVaultById(vaultId);
+             Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            Vaults vaults = vaultService.GetVaultById(vaultId, userInfo.Id);
             return Ok(vaults);
         }
         catch (Exception error)
@@ -80,10 +81,11 @@ public class VaultController : ControllerBase{
 
     
     [HttpGet("{vaultId}/keeps")]
-    public ActionResult<List<VaultedKeep>> GetKeepsInVault(int vaultId){
+    public async Task<ActionResult<List<VaultedKeep>>> GetKeepsInVault(int vaultId){
         try
         {
-            List<VaultedKeep> vaultedKeeps = vaultKeepService.GetKeepsInVault(vaultId);
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            List<VaultedKeep> vaultedKeeps = vaultKeepService.GetKeepsInVault(vaultId, userInfo.Id);
             return Ok(vaultedKeeps);
         }
         catch (Exception error)

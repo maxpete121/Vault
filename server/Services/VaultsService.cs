@@ -9,16 +9,16 @@ public class VaultService(VaultsRepository repo){
         return vaults;
     }
 
-    internal Vaults GetVaultById(int vaultId){
+    internal Vaults GetVaultById(int vaultId, string userId){
         Vaults vaults = repo.GetVaultById(vaultId);
-        if(vaults == null || vaults.IsPrivate == true){throw new Exception("Item not found.");}
+        if(vaults == null || vaults.IsPrivate == true && vaults.CreatorId != userId){throw new Exception("Item not found.");}
         else{
         return vaults;
         }
     }
 
     internal Vaults UpdateVault(Vaults vaultData, int vaultId, string userId){
-        Vaults originalVault = GetVaultById(vaultId);
+        Vaults originalVault = GetVaultById(vaultId, userId);
         if(originalVault == null)throw new Exception("Item not found.");
         if(originalVault.CreatorId == userId){
          originalVault.Name = vaultData.Name?.Length > 0 ? vaultData.Name : originalVault.Name;
@@ -33,7 +33,7 @@ public class VaultService(VaultsRepository repo){
     }
 
     internal string DeleteVault(int vaultId, string userId){
-        Vaults foundVault = GetVaultById(vaultId);
+        Vaults foundVault = GetVaultById(vaultId, userId);
         if(foundVault.CreatorId == userId){
             repo.DeleteVault(vaultId);
             return $"{foundVault.Name} was deleted.";

@@ -16,12 +16,16 @@ public class VaultKeepService(VaultKeepRepository repo){
         return vault;
     }
 
-    internal List<VaultedKeep> GetKeepsInVault(int vaultId){
+    internal List<VaultedKeep> GetKeepsInVault(int vaultId, string userId){
         Vaults vault = GetVaultById(vaultId);
-        if(vault.IsPrivate == false){
+        if(vault.IsPrivate == false && vault.CreatorId != userId){
         List<VaultedKeep> vaultedKeeps = repo.GetKeepsInVault(vaultId);
         return vaultedKeeps;
-        }else{throw new Exception("These keeps are private.");}
+        }else if(vault.CreatorId == userId){
+        List<VaultedKeep> vaultedKeeps = repo.GetKeepsInVault(vaultId);
+        return vaultedKeeps;
+        }
+        else{throw new Exception("These keeps are private.");}
     }
 
     internal VaultKeeps GetOneVaultKeepById(int vaultKeepId){
