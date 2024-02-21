@@ -7,24 +7,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form @submit.prevent="createKeep()" action="" class="text-center">
+                    <form @submit.prevent="createKeep()" class="text-center">
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-8 text-center">
-                                    <label for="">Name</label>
-                                    <input v-model="keepData.name" class="form-control" required maxlength="40" type="text">
+                                    <label for="name">Name</label>
+                                    <input id="name" v-model="keepData.name" class="form-control" required maxlength="40" type="text">
                                 </div>
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-8 text-center">
-                                    <label for="">Image URL</label>
-                                    <input v-model="keepData.img" class="form-control" required maxlength="400" type="url">
+                                    <label for="img">Image URL</label>
+                                    <input id="img" v-model="keepData.img" class="form-control" required maxlength="400" type="url">
                                 </div>
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-10 text-center">
-                                    <label for="">Description</label>
-                                    <textarea v-model="keepData.description" class="form-control" required name="description" id="" cols="40" rows="5"></textarea>
+                                    <label for="description">Description</label>
+                                    <textarea v-model="keepData.description" class="form-control" required name="description" id="description" cols="40" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -45,24 +45,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form @submit.prevent="createVault()" action="" class="text-center">
+                    <form @submit.prevent="createVault()" class="text-center">
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-8 text-center">
-                                    <label for="">Name</label>
-                                    <input v-model="vaultData.name" class="form-control" required maxlength="40" type="text">
+                                    <label for="nameTwo">Name</label>
+                                    <input id="nameTwo" v-model="vaultData.name" class="form-control" required maxlength="40" type="text">
                                 </div>
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-8 text-center">
-                                    <label for="">Image URL</label>
-                                    <input v-model="vaultData.img" class="form-control" required maxlength="400" type="url">
+                                    <label for="imgTwo">Image URL</label>
+                                    <input id="imgTwo" v-model="vaultData.img" class="form-control" required maxlength="400" type="url">
                                 </div>
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-10 text-center">
-                                    <label for="">Description</label>
-                                    <textarea v-model="vaultData.description" class="form-control" required name="descriptionTwo" id="" cols="40" rows="5"></textarea>
+                                    <label for="descriptionTwo">Description</label>
+                                    <textarea v-model="vaultData.description" class="form-control" required name="descriptionTwo" id="descriptionTwo" cols="40" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>

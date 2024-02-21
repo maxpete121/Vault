@@ -7,7 +7,7 @@
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon text-dark"></span>
     </button>
     <div class="collapse navbar-collapse align-self-center" id="navbarText">
       <ul class="navbar-nav me-auto">
@@ -29,9 +29,6 @@
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <div>
-        <button class="btn text-light" @click="toggleTheme">
-          <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
-        </button>
       </div>
       <Login />
     </div>
