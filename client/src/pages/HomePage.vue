@@ -1,7 +1,7 @@
 <template>
   <section class="container-fluid">
     <div class=" justify-content-center container-main mt-3">
-      <div class="m-2" v-for="keep in keeps">
+      <div class="mt-3" v-for="keep in keeps">
         <KeepComponentCard :keep="keep"/>
       </div>
     </div>
@@ -49,8 +49,15 @@ export default {
     }
   }
 }
+@media screen and (min-width: 576px){
+  .container-main{
+    columns: 320px;
+  }
 
-.container-main{
-  columns: 300px;
+}
+@media screen and (max-width: 576px){
+  .container-main{
+    columns: 160px;
+  }
 }
 </style>

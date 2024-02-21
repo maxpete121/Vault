@@ -1,7 +1,7 @@
 <template>
     <section class="container-fluid">
-        <div class="row justify-content-center section-main ms-4 me-4">
-            <div :style="newBg" class="col-10 bg-resize d-flex justify-content-center align-items-end p-2">
+        <div class="row justify-content-center section-main ms-lg-4 me-lg-4">
+            <div :style="newBg" class="col-lg-10 col-12 bg-resize d-flex justify-content-center align-items-end p-2">
                 <div class="">
                     <div class="text-center">
                         <img class="profile-pic rounded-circle mb-2" :src="userAccount.picture" alt="User picture.">
@@ -10,19 +10,15 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
             <h3 class="ms-4 fst-italic mt-2">Vaults</h3>
-        </div>
         <div class="row mt-2 justify-content-center vault-container ms-4 me-4 p-1">
-                <div class="col-3 m-3" v-for="userVault in userVaults">
+                <div class="col-lg-3 col-9 m-3" v-for="userVault in userVaults">
                     <VaultComponentCard class="" :userVault="userVault"/>
                 </div>
         </div>
-        <div class="row">
             <h3 class="ms-4 fst-italic mt-2">Keeps</h3>
-        </div>
         <div class="row justify-content-center vault-container ms-4 me-4 p-1">
-            <div class="col-3 m-3" v-for="keep in keeps">
+            <div class="col-lg-3 col-9 m-3" v-for="keep in keeps">
                 <ProfileKeepCard :keep="keep"/>
             </div>
         </div>

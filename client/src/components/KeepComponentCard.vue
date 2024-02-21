@@ -62,9 +62,19 @@ export default {
     transform: scale(1.02);
     cursor: pointer;
 }
-.card-child{
-    width: 260px;
-    position: absolute;
+
+@media screen and (min-width: 576px){
+    .card-child{
+        width: 260px;
+        position: absolute;
+    }
+}
+@media screen and (max-width: 576px){
+    .card-child{
+        width: 150px;
+        position: absolute;
+        font-size: small;
+    }
 }
 .card-img{
     visibility: hidden;

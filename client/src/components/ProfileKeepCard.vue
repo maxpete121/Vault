@@ -38,6 +38,8 @@ export default {
     height: 200px;
     background-position: center;
     background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 2px black;
 }
 .profile-pic{
     height: 50px;

@@ -1,8 +1,8 @@
 
 import DetailModalWrapper from './DetailModalWrapper.vue';
 <template>
-    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keeper.name" :style="newBg" class="keep-card p-2 d-flex flex-column justify-content-end">
-        <div class="d-flex justify-content-between">
+    <div @click="getKeepById(), openModal()" type="button" :title="keeper.name" :style="newBg" class="keep-card p-2 d-flex flex-column justify-content-end">
+        <div class="d-flex justify-content-between text-light">
             <h4>{{ keeper.name }}</h4>
             <button @click="deleteVaultKeep(keeper.vaultKeepId)" class="btn btn-danger">Remove</button>
         </div>
@@ -20,20 +20,33 @@ import { keepService } from '../services/KeepService';
 import {vaultKeepService} from '../services/VaultKeepService.js'
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
+import { router } from '../router';
 export default {
     props: {keeper: {type: Keeps, required: true}},
     setup(props){
+        let keeps = computed(()=> AppState.vaultsKeeps)
         async function getKeepById(){
             await keepService.updateViews(props.keeper.id)
             await keepService.getKeepById(props.keeper.id)
         }
 
+        async function openModal(){
+            if(keeps.value.length > 1){
+                Modal.getOrCreateInstance("#detailModal").show()
+            }
+        }
+
         async function deleteVaultKeep(vaultId){
-            let message = await vaultKeepService.deleteVaultKeep(vaultId)
-            Pop.success(message)
-            setTimeout(()=> Modal.getOrCreateInstance("#detailModal").hide(), 300)
+            try {
+                let message = await vaultKeepService.deleteVaultKeep(vaultId)
+                Pop.success(message)
+                setTimeout(()=> Modal.getOrCreateInstance("#detailModal").hide(), 300)
+            } catch (error) {
+                router.push({ name: 'Home'})
+            }
         }
     return { 
+        openModal,
         deleteVaultKeep,
         getKeepById,
         newBg: computed(()=>{
@@ -51,5 +64,16 @@ export default {
     height: 250px;
     background-size: cover;
     background-position: center;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px black;
+}
+
+.keep-card:hover{
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px black;
+    transform: scale(1.02);
 }
 </style>

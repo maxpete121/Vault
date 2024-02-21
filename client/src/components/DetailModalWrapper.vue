@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <div v-if="activeKeep !== null">
+        <div v-if="activeKeep !== null && account.id == activeKeep.creatorId">
           <form @submit.prevent="createVaultKeep()" action="">
             <div class="d-flex add-keep">
               <select v-model="vaultData" class="form-control w-50 me-2" name="" id="">
