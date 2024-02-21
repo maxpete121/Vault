@@ -82,5 +82,6 @@ export default {
 .profile-pic{
     height: 50px;
     width: 50px;
+    outline: solid 1px white;
 }
 </style>

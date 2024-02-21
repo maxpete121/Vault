@@ -39,8 +39,8 @@ export default {
         async function deleteVaultKeep(vaultId){
             try {
                 let message = await vaultKeepService.deleteVaultKeep(vaultId)
-                Pop.success(message)
                 setTimeout(()=> Modal.getOrCreateInstance("#detailModal").hide(), 300)
+                Pop.success(message)
             } catch (error) {
                 router.push({ name: 'Home'})
             }

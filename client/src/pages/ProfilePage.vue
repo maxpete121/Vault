@@ -1,11 +1,11 @@
 <template>
     <section class="container-fluid">
-        <div class="row justify-content-center section-main ms-lg-4 me-lg-4">
-            <div :style="newBg" class="col-lg-10 col-12 bg-resize d-flex justify-content-center align-items-end p-2">
+        <div class="row justify-content-center section-main ms-lg-4 me-lg-4 mt-2">
+            <div :style="newBg" class="col-lg-10 col-12 bg-resize d-flex justify-content-center align-items-end p-2 mb-3">
                 <div class="">
                     <div class="text-center">
                         <img class="profile-pic rounded-circle mb-2" :src="userAccount.picture" alt="User picture.">
-                        <h5>{{ userAccount.name }}</h5>
+                        <h4>{{ userAccount.name }}</h4>
                     </div>
                 </div>
             </div>
@@ -87,6 +87,7 @@ export default {
     color: white;
     background-position: center;
     background-size: cover;
+    box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.462);
 }
 
 .profile-pic {

@@ -2,9 +2,9 @@
 <section class="container-fluid">
   <div class="row justify-content-center">
     <div :style="coverImg" class="col-10 cover d-flex align-items-end justify-content-center">
-      <div class="text-center mb-3">
+      <div class="text-center mb-3 profile-info">
         <img class="rounded-circle img" :src="account.picture" alt="Your user picture.">
-        <h5 class="text-light">{{ account.name }}</h5>
+        <h4 class="text-light">{{ account.name }}</h4>
       </div>
     </div>
   </div>
@@ -34,10 +34,6 @@
         </div>
       </form>
     </div>
-    <!-- <div class="col-3">
-      <h4>Private Vaults...</h4>
-      <div></div>
-    </div> -->
   </div>
 </section>
 </template>
@@ -98,5 +94,9 @@ img {
 
 .form-field{
   border-bottom: dashed 2px rgb(95, 4, 121);
+}
+
+.profile-info{
+  text-shadow: 2px 2px 2px black;
 }
 </style>
