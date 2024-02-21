@@ -29,7 +29,7 @@
             </router-link>
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
           </div>
-            <div class="mt-2">
+            <div class="mt-2 d-flex flex-column align-items-center">
               <div class="d-flex justify-content-center">
                 <h4 class="fst-italic">{{ activeKeep.name }}</h4>
               </div>
@@ -95,6 +95,7 @@ export default {
           if(window.confirm(`Are you sure you want to delete this vault?`)){
             await keepService.deleteKeep(useActiveKeep.value.id)
             Modal.getOrCreateInstance("#detailModal").hide()
+            clearActive()
           }
         }
     return { 
