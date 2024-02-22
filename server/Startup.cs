@@ -45,6 +45,9 @@ public class Startup
 
     services.AddScoped<ProfileRepository>();
     services.AddScoped<ProfileService>();
+
+    services.AddScoped<TagsRepository>();
+    services.AddScoped<TagsService>();
   }
 
   private void ConfigureCors(IServiceCollection services)

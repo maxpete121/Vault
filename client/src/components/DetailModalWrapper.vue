@@ -20,7 +20,7 @@
           </div>
         </div>
         <div v-if="activeKeep !== null" class="d-lg-flex">
-          <div class="d-flex flex-column align-items-center">
+          <div class="d-flex flex-column align-items-center container-fit">
             <router-link :to="{ name: 'Profile', params: {profileId: activeKeep.creatorId} }">
                 <div @click="getProfileById(activeKeep.creator.id)" type="button" class="d-flex justify-content-center align-items-center mb-2" >
                     <img class="profile-pic rounded-circle" :src="activeKeep.creator.picture" alt="User picture.">
@@ -29,26 +29,29 @@
             </router-link>
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
           </div>
-            <div class="mt-2 d-flex flex-column align-items-center justify-content-between">
-              <div>
+            <div class="mt-2 d-flex flex-column align-items-center justify-content-between container-fit-two">
+              <div class="">
                 <div class="d-flex justify-content-center">
                   <h4 class="fst-italic">{{ activeKeep.name }}</h4>
                 </div>
-                <div class="ms-4 mt-4">
+                <div class="ms-2 mt-4">
                   <h5 class="fst-italic">Description</h5>
                   <p>{{ activeKeep.description }}</p>
                 </div>
               </div>
-              <div class="mb-2 text-center">
-                <h5 class="fst-italic">Tags</h5>
+              <div class="mb-2 text-center mt-3 d-flex flex-column align-items-center w-100">
+                <div class="d-flex">
+                  <h5 class="fst-italic me-2">Tags</h5>
+                  <h5 v-if="account.id == activeKeep.creatorId">{{ tags.length }}/10</h5>
+                </div>
                 <div v-if="account.id == activeKeep.creatorId && account.id">
-                  <form action="">
-                    <input class="tags-input" type="text" maxlength="30">
+                  <form @submit.prevent="createTag()" class="d-flex align-items-center" action="">
+                    <input v-model="tagData" class="tags-input" type="text" maxlength="30" required>
                     <button class="tag-button">Add a Tag</button>
                   </form>
                 </div>
-                <div>
-                  <div v-for="tag in tags"></div>
+                <div class="w-100 ps-2 pe-2 mt-2 tag-holder">
+                  <TagsComponent v-for="tag in tags" class="m-1" :tag="tag"/>
                 </div>
               </div>
             </div>
@@ -84,10 +87,15 @@ import {profileService} from '../services/ProfileService.js';
 import {vaultKeepService} from '../services/VaultKeepService.js';
 import {keepService} from '../services/KeepService.js'
 import Pop from '../utils/Pop';
+import {tagsService}from '../services/TagsService.js';
+import TagsComponent from './TagsComponent.vue';
 export default {
     setup(){
       let useActiveKeep = computed(()=> AppState.activeKeep)
+      let useAccount = computed(()=> AppState.account)
+      let useTag = computed(()=> AppState.activeTag)
       let vaultData = ref('')
+      let tagData = ref('')
         async function getProfileById(profileId){
             Modal.getOrCreateInstance("#detailModal").hide()
             await profileService.getProfileById(profileId)
@@ -112,10 +120,20 @@ export default {
             clearActive()
           }
         }
+
+        async function createTag(){
+          if(useTag.value.length < 10){
+            let newTagData = {keepId: useActiveKeep.value.id, creatorId: useAccount.value.id, name: tagData.value}
+            await tagsService.createTag(newTagData)
+            tagData.value = ''
+          }
+        }
     return { 
+      createTag,
       clearActive,
       deleteKeep,
       createVaultKeep,
+      tagData,
         vaultData,
         getProfileById,
         activeKeep: computed(()=> AppState.activeKeep),
@@ -124,7 +142,7 @@ export default {
         account: computed(()=> AppState.account),
         tags: computed(()=> AppState.activeTag),
      }
-    }
+    }, components: {TagsComponent}
 };
 </script>
 
@@ -149,7 +167,7 @@ export default {
     height: 50px;
     width: 50px;
 }
-.tag-container{
+.tag-container-main{
   background-color: whitesmoke;
   outline: solid 1px black;
 }
@@ -187,4 +205,48 @@ export default {
   padding-top: 2px;
 }
 
+.tag-button:focus{
+  all: unset;
+  outline: solid 2px black;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  cursor: pointer;
+}
+
+.tag-button:hover{
+  all: unset;
+  outline: solid 2px black;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  cursor: pointer;
+}
+
+.container-fit-two{
+  width: 50%;
+}
+
+@media screen and (min-width: 576px){
+  .container-fit{
+  width: 50%;
+}
+.container-fit-two{
+  width: 50%;
+}
+}
+@media screen and (max-width: 576px){
+  .container-fit{
+  width: 100%;
+}
+.container-fit-two{
+  width: 100%;
+}
+}
 </style>

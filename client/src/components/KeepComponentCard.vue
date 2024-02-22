@@ -1,5 +1,5 @@
 <template>
-    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex justify-content-center align-items-end p-2">
+    <div @click="getKeepById(), getTagsByKeep()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keepCard d-flex justify-content-center align-items-end p-2">
         <img class="card-img" :src="keep.img" alt="">
         <div class="d-flex card-child align-items-center justify-content-between">
             <div>
@@ -22,6 +22,7 @@ import DetailModalWrapper from '../components/DetailModalWrapper.vue'
 import {keepService} from '../services/KeepService.js'
 import { vaultService } from '../services/VaultService';
 import { profileService } from '../services/ProfileService';
+import { tagsService } from '../services/TagsService';
 export default {
     props: {keep: {type: Keeps, required: true}},
     setup(props){
@@ -32,8 +33,11 @@ export default {
             await profileService.getYourVaults(useAccount.value.id)
         }
 
-        async function getTagsByKeep(){}
+        async function getTagsByKeep(){
+            await tagsService.getTagsByKeep(props.keep.id)
+        }
     return { 
+        getTagsByKeep,
         getKeepById,
         styleBg: computed(()=>{
             let style = `background-image: url('${props.keep.img}');`

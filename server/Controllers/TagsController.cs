@@ -47,7 +47,7 @@ public class TagsController : ControllerBase{
         try
         {
             Tags tags = tagsService.GetTagById(tagId);
-            return tags;
+            return Ok(tags);
         }
         catch (Exception error)
         {
