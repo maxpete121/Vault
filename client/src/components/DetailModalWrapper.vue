@@ -30,7 +30,7 @@
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
           </div>
             <div class="mt-2 d-flex flex-column align-items-center justify-content-between container-fit-two">
-              <div class="">
+              <div class="top-info w-100">
                 <div class="d-flex justify-content-center">
                   <h4 class="fst-italic">{{ activeKeep.name }}</h4>
                 </div>
@@ -40,9 +40,9 @@
                 </div>
               </div>
               <div class="mb-2 text-center mt-3 d-flex flex-column align-items-center w-100">
-                <div class="d-flex">
+                <div class="d-flex tag-style justify-content-center">
                   <h5 class="fst-italic me-2">Tags</h5>
-                  <h5 v-if="account.id == activeKeep.creatorId">{{ tags.length }}/10</h5>
+                  <h5 class="" v-if="account.id == activeKeep.creatorId">{{ tags.length }}/10</h5>
                 </div>
                 <div v-if="account.id == activeKeep.creatorId && account.id">
                   <form @submit.prevent="createTag()" class="d-flex align-items-center" action="">
@@ -148,6 +148,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.top-info{
+  border-bottom: solid 2px black;
+}
 .add-keep{
   width: 300px;
 }
@@ -248,5 +251,10 @@ export default {
 .container-fit-two{
   width: 100%;
 }
+}
+
+.tag-style{
+  border-bottom: solid 2px black;
+  margin-bottom: 5px;
 }
 </style>

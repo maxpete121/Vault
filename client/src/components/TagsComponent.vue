@@ -5,7 +5,7 @@
                 <div class="tag-main-card">
                     <h6 class="mt-1 fst-italic">#{{ tag.name }}</h6>
                 </div>
-                <button class="tag-delete"><i type="button" class="mdi mdi-close fs-5 ms-1 me-1"></i></button>
+                <button @click="deleteTag()" class="tag-delete"><i type="button" class="mdi mdi-close fs-5 ms-1 me-1"></i></button>
             </div>
         </div>
         <div v-if="account.id !== tag.creatorId" class="d-inline-block align-items-center">
@@ -21,10 +21,19 @@
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { Tags } from '../models/Tags';
+import {tagsService} from '../services/TagsService.js'
+import Pop from '../utils/Pop';
 export default {
     props: {tag: {type: Tags, required: true}},
-    setup(){
+    setup(props){
+        async function deleteTag(){
+            if(window.confirm(`Are you sure you want to remove ${props.tag.name}`)){
+                let message = await tagsService.deleteTag(props.tag.id)
+                Pop.success(message)
+            }
+        }
     return { 
+        deleteTag,
         account: computed(()=> AppState.account),
      }
     }
@@ -65,6 +74,14 @@ export default {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: rgba(255, 0, 0, 0.219);
+}
+
+.tag-delete:focus{
+    all: unset;
+    outline: solid 1px black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgba(212, 212, 212, 0.547);
 }
 
 .tag-main-card-two{
