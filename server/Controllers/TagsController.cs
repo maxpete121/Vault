@@ -55,4 +55,20 @@ public class TagsController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpDelete("{tagId}")]
+    [Authorize]
+    public async Task<ActionResult<string>> DeleteTag(int tagId){
+        try
+        {
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            string message = tagsService.DeleteTag(tagId, userInfo.Id);
+            return Ok(message);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    } 
 }

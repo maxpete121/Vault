@@ -53,4 +53,12 @@ public class TagsRepository(IDbConnection db){
         Tags tags = db.Query<Tags>(sql, new{tagId}).FirstOrDefault();
         return tags;
     }
+
+    internal void DeleteTag(int tagId){
+        string sql = @"
+        DELETE FROM tags
+        WHERE id = @tagId
+        ";
+        db.Execute(sql, new{tagId});
+    }
 }

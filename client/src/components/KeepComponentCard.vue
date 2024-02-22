@@ -31,6 +31,8 @@ export default {
             await keepService.getKeepById(props.keep.id)
             await profileService.getYourVaults(useAccount.value.id)
         }
+
+        async function getTagsByKeep(){}
     return { 
         getKeepById,
         styleBg: computed(()=>{

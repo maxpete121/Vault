@@ -29,13 +29,27 @@
             </router-link>
             <img class="image-resize" :src="activeKeep.img" alt="Keep image.">
           </div>
-            <div class="mt-2 d-flex flex-column align-items-center">
-              <div class="d-flex justify-content-center">
-                <h4 class="fst-italic">{{ activeKeep.name }}</h4>
+            <div class="mt-2 d-flex flex-column align-items-center justify-content-between">
+              <div>
+                <div class="d-flex justify-content-center">
+                  <h4 class="fst-italic">{{ activeKeep.name }}</h4>
+                </div>
+                <div class="ms-4 mt-4">
+                  <h5 class="fst-italic">Description</h5>
+                  <p>{{ activeKeep.description }}</p>
+                </div>
               </div>
-              <div class="ms-4 mt-4">
-                <h6>Description</h6>
-                <p>{{ activeKeep.description }}</p>
+              <div class="mb-2 text-center">
+                <h5 class="fst-italic">Tags</h5>
+                <div v-if="account.id == activeKeep.creatorId && account.id">
+                  <form action="">
+                    <input class="tags-input" type="text" maxlength="30">
+                    <button class="tag-button">Add a Tag</button>
+                  </form>
+                </div>
+                <div>
+                  <div v-for="tag in tags"></div>
+                </div>
               </div>
             </div>
         </div>
@@ -107,7 +121,8 @@ export default {
         activeKeep: computed(()=> AppState.activeKeep),
         vaults: computed(()=> AppState.userVaults),
         yourVaults: computed(()=> AppState.yourVaults),
-        account: computed(()=> AppState.account)
+        account: computed(()=> AppState.account),
+        tags: computed(()=> AppState.activeTag),
      }
     }
 };
@@ -134,4 +149,42 @@ export default {
     height: 50px;
     width: 50px;
 }
+.tag-container{
+  background-color: whitesmoke;
+  outline: solid 1px black;
+}
+
+.tags-input{
+  all: unset;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  border: solid 1px black;
+  background-color: white;
+  margin-right: 1px;
+}
+.tags-input:focus{
+  all: unset;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  border: solid 1px black;
+  background-color: whitesmoke;
+  margin-right: 1px;
+}
+.tag-button{
+  all: unset;
+  outline: solid 2px black;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
 </style>

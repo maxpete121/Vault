@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import { Keeps } from './models/Keeps.js'
 import { Account } from './models/Account.js'
 import { Vaults } from './models/Vaults.js'
+import { Tags } from './models/Tags.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -26,4 +27,6 @@ export const AppState = reactive({
   yourVaults: [],
 /**@type {Vaults[]} */
   privateVaults: [],
+/**@type {Tags[]} */
+  activeTag: [],
 })

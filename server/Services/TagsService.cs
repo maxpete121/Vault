@@ -18,4 +18,13 @@ public class TagsService(TagsRepository repo){
         Tags tag = repo.GetTagById(tagId);
         return tag;
     }
+
+    internal string DeleteTag(int tagId, string userId){
+        Tags foundTag = GetTagById(tagId);
+        if(userId == foundTag.CreatorId){
+        repo.DeleteTag(tagId);
+        string message = $"{foundTag.Name} was removed.";
+        return message;
+        }else{throw new Exception("You are not the owner of this tag.");}
+    }
 }
