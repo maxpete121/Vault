@@ -48,6 +48,17 @@ CREATE TABLE vaultkeeps(
   Foreign Key (keepId) REFERENCES keeps(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
+
+CREATE TABLE tags(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  creatorId VARCHAR(255),
+  keepId INT NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
+  Foreign Key (keepId) REFERENCES keeps(id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
+
+
         INSERT INTO vaultkeeps
         (creatorId, vaultId, keepId)
         VALUES

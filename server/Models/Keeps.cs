@@ -14,3 +14,6 @@ public class Keeps : RepoItem<int>{
 public class VaultedKeep : Keeps{
     public int VaultKeepId {get; set;}
 }
+public class Tag : Keeps{
+    public int TagId {get; set;}
+}
