@@ -27,4 +27,32 @@ public class TagsController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpGet("{keepId}")]
+    public ActionResult<List<Tags>> GetTagsByKeep(int keepId){
+        try
+        {
+           List<Tags> tags = tagsService.GetTagsByKeep(keepId);
+           return Ok(tags); 
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
+
+    [HttpGet("{tagId}/tag")]
+    public ActionResult<Tags> GetTagById(int tagId){
+        try
+        {
+            Tags tags = tagsService.GetTagById(tagId);
+            return tags;
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
 }
