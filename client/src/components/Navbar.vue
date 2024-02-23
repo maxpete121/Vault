@@ -28,7 +28,8 @@
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <div>
+      <div class="me-4">
+        <SearchbarComponent/>
       </div>
       <Login />
     </div>
@@ -43,6 +44,7 @@ import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import ModalWrapper from './ModalWrapper.vue';
 import { AppState } from '../AppState';
+import SearchbarComponent from './SearchbarComponent.vue';
 export default {
   setup() {
 
@@ -62,7 +64,7 @@ export default {
       }
     }
   },
-  components: { Login, ModalWrapper }
+  components: { Login, ModalWrapper, SearchbarComponent }
 }
 </script>
 

@@ -102,4 +102,18 @@ public class KeepController : ControllerBase{
             return BadRequest(error.Message);
         }
     }
+
+    [HttpGet("{query}/search")]
+    public ActionResult<List<Keeps>> SearchKeeps(string query){
+        try
+        {
+            List<Keeps> keeps = keepService.SearchKeeps(query);
+            return keeps;
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
 }

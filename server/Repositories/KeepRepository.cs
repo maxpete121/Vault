@@ -110,4 +110,19 @@ public class KeepRepository(IDbConnection db){
         ";
         db.Execute(sql, new{keepId});
     }
+
+    internal List<Keeps> SearchKeeps(string query){
+        string sql = @"
+        SELECT
+        keeps.*,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.name = @query OR keeps.description = @query";
+        List<Keeps> keeps = db.Query<Keeps, Account, Keeps>(sql, (keep, account)=>{
+            keep.Creator = account;
+            return keep;
+        }, new{query}).ToList();
+        return keeps;
+    }
 }

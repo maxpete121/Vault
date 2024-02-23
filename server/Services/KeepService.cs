@@ -46,4 +46,9 @@ public class KeepService(KeepRepository repo){
         return $"{keepToDelete.Name} was deleted.";
         }else{throw new Exception("You can only delete things you own!");}
     }
+
+    internal List<Keeps> SearchKeeps(string query){
+        List<Keeps> keeps = repo.SearchKeeps(query);
+        return keeps;
+    }
 }
