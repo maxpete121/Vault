@@ -1,12 +1,12 @@
 <template>
     <div>
         <form @submit.prevent="searchKeeps()" action="">
-            <select v-model="paramData" class="search-select" name="" id="">
+            <select v-model="paramData" class="search-select" name="search-filter" id="">
                 <option selected disabled value="filter">Filter ↓</option>
                 <option value="tag">Tags</option>
                 <option value="keep">Name</option>
             </select>
-            <input v-model="searchData" class="search-input" type="text">
+            <input name="search-bar" v-model="searchData" class="search-input" type="text">
             <button class="search-button">Search</button>
         </form>
     </div>

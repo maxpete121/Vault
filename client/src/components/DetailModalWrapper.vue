@@ -45,7 +45,7 @@
                   <h5 class="" v-if="account.id == activeKeep.creatorId">{{ tags.length }}/10</h5>
                 </div>
                 <div v-if="account.id == activeKeep.creatorId && account.id">
-                  <form @submit.prevent="createTag()" class="d-flex align-items-center" action="">
+                  <form @submit.prevent="tagCheck()" class="d-flex align-items-center" action="">
                     <input v-model="tagData" class="tags-input" type="text" maxlength="30" required>
                     <button class="tag-button">Add a Tag</button>
                   </form>
@@ -121,14 +121,38 @@ export default {
           }
         }
 
+        async function tagCheck(){
+          let runIt = ''
+          let newTagLower = tagData.value
+          let newTag = newTagLower.toUpperCase()
+          for(let i = 0; AppState.activeTag.length > i; i++){
+            let string = AppState.activeTag[i].name
+            let testString = string.toUpperCase()
+            if(testString == newTag){
+              Pop.error('This tag already exists.')
+              runIt = 'no'
+            }
+          }
+          if(runIt !== 'no'){
+            createTag()
+          }
+        }
+
         async function createTag(){
-          if(useTag.value.length < 10){
+          let tagName = tagData.value
+          let isMade = AppState.activeTag.find(tag => tag.name == tagName)
+          if(useTag.value.length < 10 && !isMade){
             let newTagData = {keepId: useActiveKeep.value.id, creatorId: useAccount.value.id, name: tagData.value}
             await tagsService.createTag(newTagData)
             tagData.value = ''
+          }else if(useTag.value.length == 10){
+            Pop.error('This keep has the maximum amount of tags.')
+          }else if(isMade && string == tagName){
+            Pop.error('This tag already exists.')
           }
         }
     return { 
+      tagCheck,
       createTag,
       clearActive,
       deleteKeep,
@@ -142,8 +166,7 @@ export default {
         account: computed(()=> AppState.account),
         tags: computed(()=> AppState.activeTag),
      }
-    }, components: {TagsComponent}
-};
+    },};
 </script>
 
 
