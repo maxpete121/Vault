@@ -48,7 +48,11 @@ class KeepService{
         AppState.allKeeps = foundKeeps
     }
 
-    async searchKeepsByTag(tagName){}
+    async searchKeepsByTag(tagName){
+        let response = await api.get(`api/tags/${tagName}/search`)
+        let searchedTags = await response.data.map(tag => new Keeps(tag))
+        AppState.allKeeps = searchedTags
+    }
 }
 
 export const keepService = new KeepService()

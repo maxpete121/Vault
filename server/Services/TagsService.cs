@@ -27,4 +27,10 @@ public class TagsService(TagsRepository repo){
         return message;
         }else{throw new Exception("You are not the owner of this tag.");}
     }
+
+    internal List<Tag> SearchKeepTag(string query){
+        query += '%';
+        List<Tag> foundTags = repo.SearchKeepTag(query);
+        return foundTags;
+    }
 }

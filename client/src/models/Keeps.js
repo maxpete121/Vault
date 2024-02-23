@@ -11,6 +11,7 @@ export class Keeps{
         this.creator = data.creator
         this.kept = data.kept
         this.vaultKeepId = data.vaultKeepId || 0
+        this.tagId = data.tagId || 0
     }
 }
 

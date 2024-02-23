@@ -71,4 +71,18 @@ public class TagsController : ControllerBase{
             return BadRequest(error.Message);
         }
     } 
+
+    [HttpGet("{query}/search")]
+    public ActionResult<List<Tag>> SearchKeepTag(string query){
+        try
+        {
+            List<Tag> tags = tagsService.SearchKeepTag(query);
+            return Ok(tags);
+        }
+        catch (Exception error)
+        {
+            
+            return BadRequest(error.Message);
+        }
+    }
 }

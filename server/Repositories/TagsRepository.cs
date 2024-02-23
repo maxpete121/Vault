@@ -61,4 +61,23 @@ public class TagsRepository(IDbConnection db){
         ";
         db.Execute(sql, new{tagId});
     }
+
+     internal List<Tag> SearchKeepTag(string query){
+        string sql = @"
+        SELECT
+        keeps.*,
+        tags.*,
+        accounts.*
+        FROM tags
+        JOIN keeps ON tags.keepId = keeps.id
+        JOIN accounts ON tags.creatorId = accounts.id
+        WHERE tags.name LIKE @query;
+        ";
+        List<Tag> newTag = db.Query<Tag, Tags, Account, Tag>(sql, (tag, tags, account)=>{
+            tag.Creator = account;
+            tag.TagId = tags.Id;
+            return tag;
+        }, new{query}).ToList();
+        return newTag;
+    }
 }
