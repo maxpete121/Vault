@@ -59,6 +59,15 @@ CREATE TABLE tags(
 ) default charset utf8 COMMENT '';
 
 
+        SELECT
+        keeps.*,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.name LIKE 'i%'
+
+
+
         INSERT INTO vaultkeeps
         (creatorId, vaultId, keepId)
         VALUES

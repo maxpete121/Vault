@@ -41,6 +41,14 @@ class KeepService{
         AppState.allKeeps.splice(keepIndex, 1)
         return response.data
     }
+
+    async searchKeeps(query){
+        let response = await api.get(`api/keeps/${query}/search`)
+        let foundKeeps = await response.data.map(keep => new Keeps(keep))
+        AppState.allKeeps = foundKeeps
+    }
+
+    async searchKeepsByTag(tagName){}
 }
 
 export const keepService = new KeepService()

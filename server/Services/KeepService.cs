@@ -48,6 +48,7 @@ public class KeepService(KeepRepository repo){
     }
 
     internal List<Keeps> SearchKeeps(string query){
+        query += '%';
         List<Keeps> keeps = repo.SearchKeeps(query);
         return keeps;
     }

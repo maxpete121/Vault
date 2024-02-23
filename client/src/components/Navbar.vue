@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-light px-3 new-nav align-items-center d-flex">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div>
+      <div @click="getAllKeeps()">
         <h4 class="text-dark">Home</h4>
       </div>
     </router-link>
@@ -45,6 +45,7 @@ import Login from './Login.vue';
 import ModalWrapper from './ModalWrapper.vue';
 import { AppState } from '../AppState';
 import SearchbarComponent from './SearchbarComponent.vue';
+import { keepService } from '../services/KeepService';
 export default {
   setup() {
 
@@ -54,7 +55,12 @@ export default {
       document.documentElement.setAttribute('data-bs-theme', theme.value)
     })
 
+    async function getAllKeeps(){
+      await keepService.getAllKeeps()
+    }
+
     return {
+      getAllKeeps,
       theme,
       account: computed(()=> AppState.account),
       toggleTheme() {

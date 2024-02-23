@@ -118,7 +118,7 @@ public class KeepRepository(IDbConnection db){
         accounts.*
         FROM keeps
         JOIN accounts ON keeps.creatorId = accounts.id
-        WHERE keeps.name = @query OR keeps.description = @query";
+        WHERE keeps.name LIKE @query OR keeps.description LIKE @query";
         List<Keeps> keeps = db.Query<Keeps, Account, Keeps>(sql, (keep, account)=>{
             keep.Creator = account;
             return keep;
