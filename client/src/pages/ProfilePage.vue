@@ -51,13 +51,14 @@ export default {
             getUserKeeps()
             keepService.getAllKeeps()
         })
-        watch(AppState.userKeeps, totalView)
         let useAccount = computed(() => AppState.account)
         let useUserAccount = computed(() => AppState.activeUserProfile)
         let useKeeps = computed(()=> AppState.userKeeps)
         watch(useAccount, getUserVaults)
+        watch(useKeeps, totalView)
         const route = useRoute()
         async function totalView(){
+            AppState.totalViews = 0
             for(let i = 0; AppState.userKeeps.length > i; i++){
             AppState.totalViews += AppState.userKeeps[i].views
         }

@@ -22,6 +22,7 @@ class KeepService{
     }
 
     async updateViews(keepId){
+        let count = AppState.totalViews
         let foundKeep = AppState.allKeeps.find(keep => keep.id == keepId)
         foundKeep.views++
         let response = await api.put(`api/keeps/${keepId}/views`, foundKeep)
