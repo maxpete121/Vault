@@ -30,5 +30,7 @@ export const AppState = reactive({
 /**@type {Tags[]} */
   activeTag: [],
 
-  totalViews: null
+  totalViews: null,
+/**@type {Keeps} */
+  mostViewed: {},
 })

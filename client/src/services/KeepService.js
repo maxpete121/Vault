@@ -22,15 +22,25 @@ class KeepService{
     }
 
     async updateViews(keepId){
-        let count = AppState.totalViews
         let foundKeep = AppState.allKeeps.find(keep => keep.id == keepId)
         foundKeep.views++
         let response = await api.put(`api/keeps/${keepId}/views`, foundKeep)
-        for(let i = 0; AppState.userKeeps.length > i; i++){
-            AppState.totalViews += AppState.userKeeps[i].views
-        }
+        let newKeep = new Keeps(response.data)
+        AppState.userKeeps = AppState.userKeeps.map(keep => keep.id !== keepId ? keep : newKeep)
+        this.adjustCount()
     }
-
+    async adjustCount(){
+        let count = 0
+        for(let i = 0; AppState.userKeeps.length > i; i++){
+            count += AppState.userKeeps[i].views
+        }
+        AppState.totalViews = count
+    }
+    
+    async setMostViewed(){
+        let maxView = AppState.userKeeps.reduce((keep, keeps) => keep.views > keeps.views ? keep : keeps);
+        AppState.mostViewed = maxView
+    }
     async updateKept(keepId){
         let foundKeep = AppState.allKeeps.find(keep => keep.id == keepId)
         foundKeep.kept++

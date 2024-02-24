@@ -10,13 +10,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-2">
                 <h3 class="ms-4 fst-italic mt-2">Keeps</h3>
                 <span class="d-flex">
-                    <h3>Total Views</h3>
+                    <h3 class="ms-4 me-2">Total Views</h3>
                     <h3>{{ TotalView }}</h3>
                 </span>
+            </div>
+            <div class="col-2 d-flex flex-column align-items-center me-4">
+                <h5 class="most-text mt-2">Most Viewed</h5>
+                <div :style="topViewBg" class="top-view mt-1 w-75 p-1">
+                    <h6>{{ mostViewed.name }}</h6>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center vault-container ms-4 me-4 p-1">
@@ -54,6 +60,7 @@ export default {
         let useAccount = computed(() => AppState.account)
         let useUserAccount = computed(() => AppState.activeUserProfile)
         let useKeeps = computed(()=> AppState.userKeeps)
+        let useMostViewed = computed(()=> AppState.mostViewed)
         watch(useAccount, getUserVaults)
         watch(useKeeps, totalView)
         const route = useRoute()
@@ -73,18 +80,27 @@ export default {
         }
         async function getUserKeeps() {
             await profileService.getUserKeeps(route.params.profileId)
+            setMostViewed()
         }
-        let TotalView = computed(()=> AppState.totalViews)
+
+        async function setMostViewed(){
+            await keepService.setMostViewed()
+        }
+         
         return {
+            TotalView: computed(()=> AppState.totalViews),
             keeps: computed(() => AppState.userKeeps),
             userAccount: computed(() => AppState.activeUserProfile),
             userVaults: computed(() => AppState.userVaults),
-
+            mostViewed: computed(()=> AppState.mostViewed),
             newBg: computed(() => {
                 let style = `background-image: url('${useUserAccount.value.coverImg}');`
                 return style
             }),
-            TotalView,
+            topViewBg: computed(()=>{
+                let style = `background-image: url('${useMostViewed.value.img}');`
+                return style
+            })
         }
     }, components: { VaultComponentCard, ProfileKeepCard }
 };
@@ -117,5 +133,18 @@ export default {
     width: 80px;
     outline: solid 1px black;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.488);
+}
+
+.top-view{
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.418);
+}
+
+.most-text{
+    border-bottom: solid 1px black;
 }
 </style>

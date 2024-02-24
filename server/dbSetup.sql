@@ -59,13 +59,9 @@ CREATE TABLE tags(
 ) default charset utf8 COMMENT '';
 
 
-        SELECT
-        keeps.*,
-        accounts.*
-        FROM keeps
-        JOIN accounts ON keeps.creatorId = accounts.id
-        WHERE keeps.name LIKE 'i%'
-
+SELECT MAX(views) AS views,
+FROM keeps
+WHERE creatorId = '65837617fb48f6cd659dd941'
 
 
         INSERT INTO vaultkeeps
