@@ -29,4 +29,6 @@ export const AppState = reactive({
   privateVaults: [],
 /**@type {Tags[]} */
   activeTag: [],
+
+  totalViews: null
 })

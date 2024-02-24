@@ -122,18 +122,18 @@ export default {
         }
 
         async function tagCheck(){
-          let runIt = ''
+          let exists = 'no'
           let newTagLower = tagData.value
           let newTag = newTagLower.toUpperCase()
           for(let i = 0; AppState.activeTag.length > i; i++){
             let string = AppState.activeTag[i].name
             let testString = string.toUpperCase()
             if(testString == newTag){
+              exists = 'yes'
               Pop.error('This tag already exists.')
-              runIt = 'no'
             }
           }
-          if(runIt !== 'no'){
+          if(exists !== 'yes'){
             createTag()
           }
         }

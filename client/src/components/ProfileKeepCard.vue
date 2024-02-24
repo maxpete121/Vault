@@ -1,5 +1,5 @@
 <template>
-    <div @click="getKeepById()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keep-card d-flex flex-column justify-content-end p-2">
+    <div @click="getKeepById(), getTagsByKeep()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keep-card d-flex flex-column justify-content-end p-2">
         <div class="d-flex align-items-center justify-content-between">
                 <h5 class="">{{ keep.name }}</h5>
         </div>
@@ -14,6 +14,7 @@ import { computed, ref, onMounted } from 'vue';
 import { Keeps } from '../models/Keeps';
 import { keepService } from '../services/KeepService';
 import DetailModalWrapper from './DetailModalWrapper.vue';
+import { tagsService } from '../services/TagsService';
 export default {
     props: {keep: {type: Keeps, required: true}},
     setup(props){
@@ -21,7 +22,11 @@ export default {
             await keepService.updateViews(props.keep.id)
             await keepService.getKeepById(props.keep.id)
         }
+        async function getTagsByKeep(){
+            await tagsService.getTagsByKeep(props.keep.id)
+        }
     return { 
+        getTagsByKeep,
         getKeepById,
         styleBg: computed(()=>{
             let style = `background-image: url('${props.keep.img}');`
