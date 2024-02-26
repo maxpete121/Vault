@@ -1,5 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-light px-3 new-nav align-items-center d-flex">
+    <div class="d-flex align-items-center">
+      <h3 class="me-3 fst-italic mb-2">KeeprCo</h3>
+    </div>
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div @click="getAllKeeps()">
         <h4 class="text-dark">Home</h4>
@@ -7,7 +10,7 @@
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon text-dark"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse align-self-center" id="navbarText">
       <ul class="navbar-nav me-auto">

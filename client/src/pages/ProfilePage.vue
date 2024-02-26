@@ -11,14 +11,14 @@
             </div>
         </div>
         <div class="row justify-content-between">
-            <div class="col-2">
-                <h3 class="ms-4 fst-italic mt-2">Keeps</h3>
+            <div class="col-lg-2 col-9">
+                <h3 class="ms-lg-4 fst-italic mt-2">Keeps</h3>
                 <span class="d-flex">
                     <h3 class="ms-4 me-2">Total Views</h3>
                     <h3>{{ TotalView }}</h3>
                 </span>
             </div>
-            <div class="col-2 d-flex flex-column align-items-center me-4">
+            <div class="col-lg-2 col-9 d-flex flex-column align-items-center me-lg-4 mb-2">
                 <h5 class="most-text mt-2">Most Viewed</h5>
                 <div :style="topViewBg" class="top-view mt-1 w-75 p-1">
                     <h6>{{ mostViewed.name }}</h6>
