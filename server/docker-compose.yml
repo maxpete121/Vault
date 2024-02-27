@@ -1,11 +1,7 @@
 version: '3'
 services:
   app:
-<<<<<<< HEAD
     image: maxpete/vault:latest
-=======
-    image: maxpete/Vault:latest
->>>>>>> ac73cd363dc177bbc3e6f3577cf1f5996573a0ae
     restart: unless-stopped
     env_file:
       - vault-env

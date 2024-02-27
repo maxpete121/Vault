@@ -5,16 +5,19 @@
         <div class="d-flex align-items-center">
           <img class="logo" src="../assets/img/keepr-co-high-resolution-logo-transparent.png" alt="Logo">
         </div>
-        <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-          <div @click="getAllKeeps()">
+        <router-link class="navbar-brand d-flex justify-content-center" :to="{ name: 'Home' }">
+          <div v-if="account.id" @click="getAllKeeps()" class="me-2 d-flex align-items-center">
+            <h4 class="text-dark">Home</h4>
+          </div>
+          <div v-else @click="getAllKeeps()" class="text-center ms-3 ms-lg-1 me-2 d-flex align-items-center">
             <h4 class="text-dark">Home</h4>
           </div>
         </router-link>
         <div v-if="account.id" class="dropdown">
-          <span class="d-flex">
-            <h4 class="text-dark d-flex align-items-center" type="button" data-bs-toggle="dropdown">Create</h4>
-            <i class="mdi mdi-arrow-down-drop-circle ms-1 mt-1"></i>
-          </span>
+          <div class="d-flex align-items-center me-3" type="button" data-bs-toggle="dropdown">
+            <h4 class="text-dark d-flex align-items-center">Create</h4>
+            <i class="mdi mdi-arrow-down-drop-circle ms-1"></i>
+          </div>
           <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-end p-0" aria-labelledby="authDropdown">
             <div class="list-group">
               <div class="list-group-item dropdown-item list-group-item-action">
@@ -26,10 +29,10 @@
             </div>
           </div>
         </div>
-        <Login class="login-small ms-4"/>
+        <Login class="login-small"/>
       </div>
       <div class="d-flex align-items-lg-center justify-content-center">
-        <SearchbarComponent class="me-4"/>
+        <SearchbarComponent class="me-lg-4"/>
         <Login class="login-large"/>
       </div>
     </div>
@@ -76,8 +79,8 @@ export default {
 
 <style scoped>
 .logo {
-  height: 50px;
-  width: 80px;
+  height: 55px;
+  width: 90px;
 }
 
 .new-nav {
