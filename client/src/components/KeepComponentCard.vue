@@ -3,7 +3,7 @@
         <img class="card-img" :src="keep.img" alt="">
         <div class="d-flex card-child align-items-center justify-content-between">
             <div>
-                <h5 class="">{{ keep.name }}</h5>
+                <h6 class="">{{ keep.name }}</h6>
             </div>
             <div class="d-flex">
                 <img class="profile-pic rounded-circle" :src="keep.creator.picture" alt="User profile picture.">
@@ -77,7 +77,7 @@ export default {
 }
 @media screen and (max-width: 576px){
     .card-child{
-        width: 170px;
+        width: 150px;
         position: absolute;
     }
 }
