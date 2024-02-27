@@ -1,44 +1,41 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-light px-3 new-nav align-items-center d-flex">
-    <div class="d-flex align-items-center">
-      <h3 class="me-3 fst-italic mb-2">KeeprCo</h3>
-    </div>
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div @click="getAllKeeps()">
-        <h4 class="text-dark">Home</h4>
-      </div>
-    </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse align-self-center" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <div v-if="account.id" class="dropdown">
-            <h4 class="text-dark " type="button" data-bs-toggle="dropdown">Create</h4>
-            <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-end p-0" aria-labelledby="authDropdown">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-light px-3 new-nav">
+    <div class="d-lg-flex align-items-center justify-content-lg-between w-100">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <img class="logo" src="../assets/img/keepr-co-high-resolution-logo-transparent.png" alt="Logo">
+        </div>
+        <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+          <div @click="getAllKeeps()">
+            <h4 class="text-dark">Home</h4>
+          </div>
+        </router-link>
+        <div v-if="account.id" class="dropdown">
+          <span class="d-flex">
+            <h4 class="text-dark d-flex align-items-center" type="button" data-bs-toggle="dropdown">Create</h4>
+            <i class="mdi mdi-arrow-down-drop-circle ms-1 mt-1"></i>
+          </span>
+          <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-end p-0" aria-labelledby="authDropdown">
             <div class="list-group">
-                <div class="list-group-item dropdown-item list-group-item-action">
-                  <h6 type="button" class="" data-bs-toggle="modal" data-bs-target="#createModal">Create Keep</h6>
-                </div>
+              <div class="list-group-item dropdown-item list-group-item-action">
+                <h6 type="button" class="" data-bs-toggle="modal" data-bs-target="#createModal">Create Keep</h6>
+              </div>
               <div class="list-group-item dropdown-item list-group-item-action selectable">
                 <h6 type="button" class="" data-bs-toggle="modal" data-bs-target="#createVModal">Create Vault</h6>
               </div>
             </div>
           </div>
-          </div>
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div class="me-4">
-        <SearchbarComponent/>
+        </div>
+        <Login class="login-small ms-4"/>
       </div>
-      <Login />
+      <div class="d-flex align-items-lg-center justify-content-center">
+        <SearchbarComponent class="me-4"/>
+        <Login class="login-large"/>
+      </div>
     </div>
   </nav>
-  <ModalWrapper id="createModal"/>
-  <ModalWrapper id="createVModal"/>
+  <ModalWrapper id="createModal" />
+  <ModalWrapper id="createVModal" />
 </template>
 
 <script>
@@ -58,14 +55,14 @@ export default {
       document.documentElement.setAttribute('data-bs-theme', theme.value)
     })
 
-    async function getAllKeeps(){
+    async function getAllKeeps() {
       await keepService.getAllKeeps()
     }
 
     return {
       getAllKeeps,
       theme,
-      account: computed(()=> AppState.account),
+      account: computed(() => AppState.account),
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -78,7 +75,12 @@ export default {
 </script>
 
 <style scoped>
-.new-nav{
+.logo {
+  height: 50px;
+  width: 80px;
+}
+
+.new-nav {
   border-bottom: solid 1px black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.301);
 }
@@ -100,6 +102,20 @@ a:hover {
 @media screen and (min-width: 576px) {
   nav {
     height: 64px;
+  }
+  .login-small{
+    display: none;
+  }
+  .login-large{
+    display: inline;
+  }
+}
+@media screen and (max-width: 576px) {
+  .login-small{
+    display: inline;
+  }
+  .login-large{
+    display: none;
   }
 }
 </style>

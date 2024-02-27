@@ -1,9 +1,9 @@
 version: '3'
 services:
   app:
-    image: your-dockerhub-username/Vault:latest
+    image: maxpete/vault:latest
     restart: unless-stopped
     env_file:
-      - Vault-env
+      - vault-env
     ports:
       - "7045:80"

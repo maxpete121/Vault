@@ -18,12 +18,14 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import {keepService} from '../services/KeepService.js'
 import Pop from '../utils/Pop';
+import { router } from '../router';
 export default {
     setup(){
         let paramData = ref('filter')
         let searchData = ref('')
 
         async function searchKeeps(){
+            router.push({name: 'Home'})
             if(searchData.value.length > 0 && paramData.value == 'keep'){
                 await keepService.searchKeeps(searchData.value)
                 searchData.value = ''
@@ -47,7 +49,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.search-input{
+@media screen and (min-width: 576px){
+    .search-input{
     all: unset;
     padding-left: 10px;
     padding-right: 8px;
@@ -63,7 +66,6 @@ export default {
     padding-bottom: 3px;
     border: solid 1px black;
 }
-
 .search-button{
     all: unset;
     border: solid 1px black;
@@ -86,6 +88,52 @@ export default {
     background-color: rgb(221, 221, 221);
     cursor: pointer;
 }
+}
+@media screen and (max-width: 576px){
+    .search-input{
+    all: unset;
+    padding-left: 10px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: solid 1px black;
+    width: 100px;
+}
+.search-input:focus{
+    all: unset;
+    padding-left: 10px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: solid 1px black;
+    width: 100px;
+}
+.search-button{
+    all: unset;
+    border: solid 1px black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+.search-button:hover{
+    all: unset;
+    border: solid 1px black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+    background-color: rgb(221, 221, 221);
+    cursor: pointer;
+}
+}
+
+
+
 
 .search-select{
     all: unset;

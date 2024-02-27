@@ -6,7 +6,7 @@
     <router-view />
   </main>
    <footer class="bg-dark text-light mt-3">
-    Keeper
+    Vault
   </footer>
 </template>
 
