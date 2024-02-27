@@ -77,9 +77,8 @@ export default {
 }
 @media screen and (max-width: 576px){
     .card-child{
-        width: 160px;
+        width: 170px;
         position: absolute;
-        font-size: small;
     }
 }
 .card-img{

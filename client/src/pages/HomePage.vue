@@ -57,7 +57,7 @@ export default {
 }
 @media screen and (max-width: 576px){
   .container-main{
-    columns: 170px;
+    columns: 180px;
   }
 }
 </style>
