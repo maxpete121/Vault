@@ -14,7 +14,7 @@
           </div>
         </router-link>
         <div v-if="account.id" class="dropdown">
-          <div class="d-flex align-items-center me-3" type="button" data-bs-toggle="dropdown">
+          <div class="d-flex align-items-center me-4" type="button" data-bs-toggle="dropdown">
             <h4 class="text-dark d-flex align-items-center">Create</h4>
             <i class="mdi mdi-arrow-down-drop-circle ms-1"></i>
           </div>

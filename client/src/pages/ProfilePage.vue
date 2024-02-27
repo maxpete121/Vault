@@ -10,15 +10,15 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-between">
-            <div class="col-lg-2 col-9">
-                <h3 class="ms-lg-4 fst-italic mt-2">Keeps</h3>
+        <div class="row justify-content-lg-between justify-content-center">
+            <h3 class="ms-lg-4 fst-italic mt-2">Keeps</h3>
+            <div class="col-lg-2 col-9 d-flex justify-content-center">
                 <span class="d-flex">
-                    <h3 class="ms-4 me-2">Total Views</h3>
+                    <h3 class="me-2">Total Views</h3>
                     <h3>{{ TotalView }}</h3>
                 </span>
             </div>
-            <div class="col-lg-2 col-9 d-flex flex-column align-items-center me-lg-4 mb-2">
+            <div v-if="mostViewed.id" class="col-lg-2 col-9 d-flex flex-column align-items-center me-lg-4 mb-2 pb-2 viewed-most">
                 <h5 class="most-text mt-2">Most Viewed</h5>
                 <div :style="topViewBg" class="top-view mt-1 w-75 p-1">
                     <h6>{{ mostViewed.name }}</h6>
@@ -145,6 +145,10 @@ export default {
 }
 
 .most-text{
+    border-bottom: solid 1px black;
+}
+
+.viewed-most{
     border-bottom: solid 1px black;
 }
 </style>
