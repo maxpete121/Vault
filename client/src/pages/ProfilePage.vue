@@ -53,6 +53,7 @@ export default {
     setup() {
         onMounted(() => {
             AppState.totalViews = 0
+            profileService.getProfileById(route.params.profileId)
             getUserVaults()
             getUserKeeps()
             keepService.getAllKeeps()

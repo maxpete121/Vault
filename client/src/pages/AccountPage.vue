@@ -49,6 +49,7 @@ export default {
     let userData = ref({})
 
     async function goToProfile(){
+      AppState.activeUserProfile = {}
       router.push({ name: 'Profile', params: {profileId: useAccount.value.id}})
     }
 
