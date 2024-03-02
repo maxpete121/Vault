@@ -25,11 +25,14 @@ import { profileService } from '../services/ProfileService';
 export default {
     props: {keeper: {type: Keeps, required: true}},
     setup(props){
+        let useAccount = computed(()=> AppState.account)
         let keeps = computed(()=> AppState.vaultsKeeps)
         async function getKeepById(){
             await keepService.updateViews(props.keeper.id)
             await keepService.getKeepById(props.keeper.id)
-            await profileService.myActiveVaults()
+            if(useAccount.value.id){
+                await profileService.myActiveVaults()
+            }
             openModal()
         }
 

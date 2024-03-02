@@ -45,7 +45,9 @@ export default {
         async function getKeepById(){
             await keepService.updateViews(props.keep.id)
             await keepService.getKeepById(props.keep.id)
-            await profileService.myActiveVaults()
+            if(useAccount.value.id){
+                await profileService.myActiveVaults()
+            }
             openModal()
         }
 
