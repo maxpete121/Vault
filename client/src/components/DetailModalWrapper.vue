@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 v-if="activeKeep !== null" class="modal-title fs-5" id="exampleModalLabel">{{activeKeep.name}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button @click="clearActive()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="d-flex justify-content-center mb-4">
@@ -162,7 +162,7 @@ export default {
         getProfileById,
         activeKeep: computed(()=> AppState.activeKeep),
         vaults: computed(()=> AppState.userVaults),
-        yourVaults: computed(()=> AppState.yourVaults),
+        yourVaults: computed(()=> AppState.addToVault),
         account: computed(()=> AppState.account),
         tags: computed(()=> AppState.activeTag),
      }

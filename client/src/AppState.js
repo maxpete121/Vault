@@ -33,4 +33,6 @@ export const AppState = reactive({
   totalViews: null,
 /**@type {Keeps} */
   mostViewed: {},
+
+  addToVault: [],
 })

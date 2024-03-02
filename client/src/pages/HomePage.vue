@@ -51,13 +51,13 @@ export default {
 }
 @media screen and (min-width: 576px){
   .container-main{
-    columns: 320px;
+    columns: 285px;
   }
 
 }
 @media screen and (max-width: 576px){
   .container-main{
-    columns: 190px;
+    columns: 170px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="searchKeeps()" action="">
+        <form @submit.prevent="searchKeeps()" action="" class="d-flex">
             <select v-model="paramData" class="search-select" name="search-filter" id="">
                 <option selected disabled value="filter">Filter ↓</option>
                 <option value="tag">Tags</option>
@@ -91,15 +91,6 @@ export default {
 }
 @media screen and (max-width: 576px){
     .search-input{
-    all: unset;
-    padding-left: 10px;
-    padding-right: 8px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border: solid 1px black;
-    width: 100px;
-}
-.search-input:focus{
     all: unset;
     padding-left: 10px;
     padding-right: 8px;

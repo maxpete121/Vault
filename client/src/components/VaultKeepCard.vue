@@ -1,7 +1,7 @@
 
 import DetailModalWrapper from './DetailModalWrapper.vue';
 <template>
-    <div @click="getKeepById(), openModal()" type="button" :title="keeper.name" :style="newBg" class="keep-card p-2 d-flex flex-column justify-content-end">
+    <div @click="getKeepById()" type="button" :title="keeper.name" :style="newBg" class="keep-card p-2 d-flex flex-column justify-content-end">
         <div class="d-flex justify-content-between text-light">
             <h4>{{ keeper.name }}</h4>
             <button v-if="account.id == activeVault.creatorId" @click="deleteVaultKeep(keeper.vaultKeepId)" class="btn btn-danger">Remove</button>
@@ -21,6 +21,7 @@ import {vaultKeepService} from '../services/VaultKeepService.js'
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
 import { router } from '../router';
+import { profileService } from '../services/ProfileService';
 export default {
     props: {keeper: {type: Keeps, required: true}},
     setup(props){
@@ -28,6 +29,8 @@ export default {
         async function getKeepById(){
             await keepService.updateViews(props.keeper.id)
             await keepService.getKeepById(props.keeper.id)
+            await profileService.myActiveVaults()
+            openModal()
         }
 
         async function openModal(){
@@ -35,6 +38,7 @@ export default {
                 Modal.getOrCreateInstance("#detailModal").show()
             }
         }
+
 
         async function deleteVaultKeep(vaultId){
             try {

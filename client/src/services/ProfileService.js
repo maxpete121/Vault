@@ -1,3 +1,4 @@
+import App from "../App.vue"
 import { AppState } from "../AppState"
 import { Account } from "../models/Account"
 import { Keeps } from "../models/Keeps"
@@ -34,6 +35,12 @@ class ProfileService{
         let response = await api.get('/account/vaults')
         let newVaults = await response.data.map(vault => new Vaults(vault))
         AppState.userVaults = newVaults
+    }
+
+    async myActiveVaults(){
+        let response = await api.get('/account/vaults')
+        let newVaults = await response.data.map(vault => new Vaults(vault))
+        AppState.addToVault = newVaults
     }
 }
 

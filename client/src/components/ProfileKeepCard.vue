@@ -1,5 +1,5 @@
 <template>
-    <div @click="getKeepById(), getTagsByKeep()" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" :title="keep.name" :style="styleBg" class="keep-card d-flex flex-column justify-content-end p-2">
+    <div @click="getKeepById(), getTagsByKeep()" type="button" :title="keep.name" :style="styleBg" class="keep-card d-flex flex-column justify-content-end p-2">
         <div class="d-flex align-items-center justify-content-between">
                 <h5 class="">{{ keep.name }}</h5>
         </div>
@@ -15,15 +15,23 @@ import { Keeps } from '../models/Keeps';
 import { keepService } from '../services/KeepService';
 import DetailModalWrapper from './DetailModalWrapper.vue';
 import { tagsService } from '../services/TagsService';
+import { Modal } from 'bootstrap';
+import { vaultService } from '../services/VaultService';
+import { profileService } from '../services/ProfileService';
 export default {
     props: {keep: {type: Keeps, required: true}},
     setup(props){
         async function getKeepById(){
             await keepService.updateViews(props.keep.id)
             await keepService.getKeepById(props.keep.id)
+            await profileService.myActiveVaults()
+            openModal()
         }
         async function getTagsByKeep(){
             await tagsService.getTagsByKeep(props.keep.id)
+        }
+        async function openModal(){
+            Modal.getOrCreateInstance('#detailModal').show()
         }
     return { 
         getTagsByKeep,
